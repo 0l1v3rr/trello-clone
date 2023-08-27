@@ -7,6 +7,9 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+    NEXTAUTH_SECRET: z.string().default("SECRET"),
+    GITHUB_ID: z.string(),
+    GITHUB_SECRET: z.string(),
   },
   skipValidation: process.env.SKIP_ENV_VALIDATION === "true",
   client: {},
