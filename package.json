@@ -13,8 +13,12 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,js,json,md,css}\" --cache",
     "prepare": "husky install"
   },
+  "prisma": {
+    "seed": "ts-node ./prisma/seed.ts"
+  },
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
+    "@prisma/client": "^5.2.0",
     "@radix-ui/react-dropdown-menu": "^2.0.5",
     "@radix-ui/react-slot": "^1.0.2",
     "@types/node": "20.5.6",
@@ -40,6 +44,7 @@
     "husky": "^8.0.0",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.2",
-    "prettier-plugin-tailwindcss": "^0.5.3"
+    "prettier-plugin-tailwindcss": "^0.5.3",
+    "prisma": "^5.2.0"
   }
 }
