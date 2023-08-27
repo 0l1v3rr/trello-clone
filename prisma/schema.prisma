@@ -7,35 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Account {
-  id                 String    @id @default(uuid())
-  providerType       String
-  providerId         String
-  providerAccountId  String
-  refreshToken       String?
-  accessToken        String?
-  accessTokenExpires DateTime?
-  user               User      @relation(fields: [userId], references: [id])
-  userId             String
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
-
-  @@unique([providerId, providerAccountId])
-}
-
 model User {
-  id        String    @id @default(uuid())
+  id        String   @id @default(uuid())
   name      String
-  email     String    @unique
-  username  String    @unique
-  password  String
+  email     String   @unique
+  username  String   @unique
+  password  String?
   status    String?
   image     String?
   active    Boolean?
-  role      RoleEnum  @default(USER)
-  accounts  Account[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  role      RoleEnum @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum RoleEnum {

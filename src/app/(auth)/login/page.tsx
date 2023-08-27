@@ -1,19 +1,19 @@
 import React from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { getProviders } from "next-auth/react";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import DiscordAuth from "@/app/(auth)/login/discord-auth";
+import GithubAuth from "@/app/(auth)/login/github-auth";
 import LoginForm from "@/app/(auth)/login/login-form";
-import GithubAuth from "./github-auth";
-import GoogleAuth from "./google-auth";
 
-const LoginPage = () => {
+const LoginPage = async () => {
+  const providers = await getProviders();
+
   return (
     <main className="w-screen h-screen flex items-center justify-center overflow-hidden">
       <Card className="w-96">
@@ -23,8 +23,8 @@ const LoginPage = () => {
         </CardHeader>
 
         <CardContent className="flex gap-4">
-          <GithubAuth />
-          <GoogleAuth />
+          <GithubAuth github={providers?.github} />
+          <DiscordAuth discord={providers?.discord} />
         </CardContent>
 
         <CardContent>

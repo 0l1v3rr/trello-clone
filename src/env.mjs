@@ -10,6 +10,8 @@ export const env = createEnv({
     NEXTAUTH_SECRET: z.string().default("SECRET"),
     GITHUB_ID: z.string(),
     GITHUB_SECRET: z.string(),
+    DISCORD_ID: z.string(),
+    DISCORD_SECRET: z.string(),
   },
   skipValidation: process.env.SKIP_ENV_VALIDATION === "true",
   client: {},
