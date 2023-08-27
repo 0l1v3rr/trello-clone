@@ -9,8 +9,9 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "preview": "next build && next start",
-    "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\" --cache",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,json,md}\" --cache"
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md,css}\" --cache",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,json,md,css}\" --cache",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
@@ -36,6 +37,8 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.1",
     "prettier": "^3.0.2",
     "prettier-plugin-tailwindcss": "^0.5.3"
   }
