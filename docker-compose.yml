@@ -3,7 +3,7 @@ services:
   db:
     image: mysql:8.1
     environment:
-      MYSQL_DATABASE: 'trello-clone'
+      MYSQL_DATABASE: 'trello_clone'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
     ports:

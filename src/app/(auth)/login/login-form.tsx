@@ -53,7 +53,10 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6 items-stretch flex flex-col"
+      >
         {error && <Alert variant="destructive">{error}</Alert>}
 
         <FormField
@@ -84,7 +87,7 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
           )}
         />
 
-        <Button variant="link" className="w-full -p-4" asChild>
+        <Button variant="link" className="w-fit mx-auto" asChild>
           <Link href="/register">Don&apos;t have an account?</Link>
         </Button>
 
