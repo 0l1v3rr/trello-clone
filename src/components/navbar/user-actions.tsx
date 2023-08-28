@@ -23,7 +23,7 @@ const UserActions: FC<UserActionsProps> = ({ user }) => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className="cursor-pointer" asChild>
         <Avatar>
           <AvatarImage src={user.image ?? undefined} />
           <AvatarFallback>{generateInitials(user.name)}</AvatarFallback>
