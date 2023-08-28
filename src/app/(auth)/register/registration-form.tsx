@@ -2,13 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { loginSchema } from "@/lib/schemas/login";
+import { registerSchema } from "@/lib/schemas/register";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,32 +19,30 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { createUser } from "@/app/(auth)/register/actions";
 
-const LoginForm = () => {
-  const params = useSearchParams();
+const RegistrationForm = () => {
   const router = useRouter();
-
   const [error, setError] = useState<string>();
 
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
-      username: params.get("email") ?? "",
+      email: "",
+      name: "",
       password: "",
+      passwordConfirmation: "",
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof loginSchema>) => {
-    const res = await signIn("credentials", {
-      ...values,
-      callbackUrl: params.get("callbackUrl") ?? "/",
-      redirect: false,
-    });
-
-    if (!res || res.error) {
-      setError("Invalid login credentials");
-    } else {
-      router.push(params.get("callbackUrl") ?? "/");
+  const onSubmit = async (values: z.infer<typeof registerSchema>) => {
+    try {
+      const res = await createUser(values);
+      router.push(
+        `/login?email=${encodeURI(res.email)}&successfulRegistration=true`
+      );
+    } catch (e: any) {
+      setError(e.message);
     }
   };
 
@@ -57,18 +54,28 @@ const LoginForm = () => {
       >
         {error && <Alert variant="destructive">{error}</Alert>}
 
-        {params.get("successfulRegistration") && !error && (
-          <Alert variant="success">Successful registration!</Alert>
-        )}
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder="John Doe" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <FormField
           control={form.control}
-          name="username"
+          name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>E-mail or username</FormLabel>
+              <FormLabel>E-mail</FormLabel>
               <FormControl>
-                <Input placeholder="johndoe" {...field} />
+                <Input placeholder="johndoe@example.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -89,8 +96,22 @@ const LoginForm = () => {
           )}
         />
 
+        <FormField
+          control={form.control}
+          name="passwordConfirmation"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password Confirmation</FormLabel>
+              <FormControl>
+                <Input placeholder="*************" type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <Button variant="link" className="w-fit mx-auto" asChild>
-          <Link href="/register">Don&apos;t have an account?</Link>
+          <Link href="/login">Already have an account?</Link>
         </Button>
 
         <Button
@@ -108,4 +129,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegistrationForm;

@@ -1,5 +1,6 @@
 import * as bcrypt from "bcrypt";
 import { prisma } from "@/lib/prisma";
+import { generateUsernameFromEmail } from "@/lib/utils";
 
 interface SsoCredentials {
   name: string;
@@ -13,10 +14,6 @@ interface LoginCredentials {
 }
 
 export async function createSsoUser(credentials: SsoCredentials) {
-  if (!credentials.email) {
-    throw new Error("Your provider must provide an email!");
-  }
-
   const user = await prisma.user.findUnique({
     where: { email: credentials.email },
   });
@@ -27,7 +24,7 @@ export async function createSsoUser(credentials: SsoCredentials) {
     data: {
       email: credentials.email,
       name: credentials.name,
-      username: credentials.email.split("@")[0],
+      username: generateUsernameFromEmail(credentials.email),
       image: credentials.avatar,
     },
   });

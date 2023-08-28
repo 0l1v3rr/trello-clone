@@ -16,7 +16,7 @@ const LoginPage = async () => {
 
   return (
     <main className="w-screen h-screen flex items-center justify-center overflow-hidden">
-      <Card className="w-96">
+      <Card className="w-full md:w-96 m-4">
         <CardHeader className="items-center">
           <CardTitle>Login</CardTitle>
           <CardDescription>Trello Clone</CardDescription>

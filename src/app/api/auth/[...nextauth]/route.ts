@@ -8,6 +8,7 @@ import { createSsoUser, login } from "@/app/api/auth/[...nextauth]/actions";
 const handler = NextAuth({
   pages: {
     signIn: "/login",
+    newUser: "/register",
   },
   secret: env.NEXTAUTH_SECRET,
   providers: [
