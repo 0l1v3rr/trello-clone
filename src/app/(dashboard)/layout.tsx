@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import Navbar from "@/components/navbar/navbar";
 import Navigate from "@/components/navigate";
-import { options } from "../api/auth/[...nextauth]/route";
+import { options } from "@/app/api/auth/[...nextauth]/options";
 
 export default async function DashboardLayout({
   children,

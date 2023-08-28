@@ -12,10 +12,10 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,json,md,css}\" --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,json,md,css}\" --cache",
     "prepare": "husky install",
-    "seed": "ts-node ./prisma/seed.ts"
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "prisma": {
-    "seed": "ts-node ./prisma/seed.ts"
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.0",

@@ -8,20 +8,40 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  username  String   @unique
-  password  String?
-  status    String?
-  image     String?
-  active    Boolean?
-  role      RoleEnum @default(USER)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(uuid())
+  name        String
+  email       String   @unique
+  username    String   @unique
+  password    String?
+  status      String?
+  image       String?
+  active      Boolean?
+  role        RoleEnum @default(USER)
+  boards      Board[]  @relation("OwnedBoards")
+  guestBoards Board[]  @relation("GuestBoards")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map(name: "users")
 }
 
 enum RoleEnum {
   USER
   ADMIN
+}
+
+model Board {
+  id        String   @id @default(uuid())
+  name      String
+  slug      String
+  image     Json
+  public    Boolean
+  owner     User     @relation("OwnedBoards", fields: [ownerId], references: [id])
+  ownerId   String
+  members   User[]   @relation("GuestBoards")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([slug, ownerId])
+  @@map(name: "boards")
 }
