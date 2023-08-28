@@ -15,14 +15,14 @@ const GithubAuth: FC<GitHubAuthProps> = ({ github }) => {
 
   return (
     <Button
-      className="w-full text-white py-7 rounded-lg bg-[#010409] hover:bg-black"
+      className="w-full rounded-lg bg-[#010409] py-7 text-white hover:bg-black"
       onClick={() =>
         signIn(github?.id, {
           callbackUrl: params.get("callbackUrl") ?? "/",
         })
       }
     >
-      <div className="text-xl mr-2">
+      <div className="mr-2 text-xl">
         <FaGithub />
       </div>
       GitHub

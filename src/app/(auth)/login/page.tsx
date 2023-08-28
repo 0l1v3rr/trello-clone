@@ -20,8 +20,8 @@ const LoginPage = async () => {
   const providers = await getProviders();
 
   return (
-    <main className="w-screen h-screen flex items-center justify-center overflow-hidden">
-      <Card className="w-full md:w-96 m-4">
+    <main className="flex h-screen w-screen items-center justify-center overflow-hidden">
+      <Card className="m-4 w-full md:w-96">
         <CardHeader className="items-center">
           <CardTitle>Login</CardTitle>
           <CardDescription>Trello Clone</CardDescription>
@@ -33,7 +33,7 @@ const LoginPage = async () => {
         </CardContent>
 
         <CardContent>
-          <hr className="bg-border w-[calc(21rem)] h-[1px] mx-auto mb-4" />
+          <hr className="mx-auto mb-4 h-[1px] w-[calc(21rem)] bg-border" />
         </CardContent>
 
         <CardContent>

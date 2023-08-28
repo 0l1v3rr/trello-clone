@@ -15,14 +15,14 @@ const DiscordAuth: FC<DiscordAuthProps> = ({ discord }) => {
 
   return (
     <Button
-      className="w-full text-white py-7 rounded-lg bg-[#5d6feb] hover:bg-[#768dda]"
+      className="w-full rounded-lg bg-[#5d6feb] py-7 text-white hover:bg-[#768dda]"
       onClick={() =>
         signIn(discord?.id, {
           callbackUrl: params.get("callbackUrl") ?? "/",
         })
       }
     >
-      <div className="text-xl mr-2">
+      <div className="mr-2 text-xl">
         <BsDiscord />
       </div>
       Discord

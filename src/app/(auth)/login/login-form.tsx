@@ -53,7 +53,7 @@ const LoginForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 items-stretch flex flex-col"
+        className="flex flex-col items-stretch space-y-6"
       >
         {error && <Alert variant="destructive">{error}</Alert>}
 
@@ -89,7 +89,7 @@ const LoginForm = () => {
           )}
         />
 
-        <Button variant="link" className="w-fit mx-auto" asChild>
+        <Button variant="link" className="mx-auto w-fit" asChild>
           <Link href="/register">Don&apos;t have an account?</Link>
         </Button>
 

@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 
 const LoginPage = async () => {
   return (
-    <main className="w-screen h-screen flex items-center justify-center overflow-hidden">
-      <Card className="w-full md:w-96 m-4">
+    <main className="flex h-screen w-screen items-center justify-center overflow-hidden">
+      <Card className="m-4 w-full md:w-96">
         <CardHeader className="items-center">
           <CardTitle>Register</CardTitle>
           <CardDescription>Trello Clone</CardDescription>
