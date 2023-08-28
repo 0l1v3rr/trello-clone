@@ -1,4 +1,5 @@
 import React from "react";
+import { Metadata } from "next";
 import {
   Card,
   CardContent,
@@ -7,6 +8,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import RegisterForm from "@/app/(auth)/register/registration-form";
+
+export const metadata: Metadata = {
+  title: "Login",
+};
 
 const LoginPage = async () => {
   return (

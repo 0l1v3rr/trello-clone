@@ -1,11 +1,11 @@
 import { env } from "@/env.mjs";
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import DiscordProvider, { DiscordProfile } from "next-auth/providers/discord";
 import GitHubProvider, { GithubProfile } from "next-auth/providers/github";
 import { createSsoUser, login } from "@/app/api/auth/[...nextauth]/actions";
 
-const handler = NextAuth({
+export const options: AuthOptions = {
   pages: {
     signIn: "/login",
     newUser: "/register",
@@ -51,6 +51,8 @@ const handler = NextAuth({
       },
     }),
   ],
-});
+};
+
+const handler = NextAuth(options);
 
 export { handler as GET, handler as POST };

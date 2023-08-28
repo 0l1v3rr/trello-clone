@@ -1,4 +1,5 @@
 import React from "react";
+import { Metadata } from "next";
 import { getProviders } from "next-auth/react";
 import {
   Card,
@@ -10,6 +11,10 @@ import {
 import DiscordAuth from "@/app/(auth)/login/discord-auth";
 import GithubAuth from "@/app/(auth)/login/github-auth";
 import LoginForm from "@/app/(auth)/login/login-form";
+
+export const metadata: Metadata = {
+  title: "Login",
+};
 
 const LoginPage = async () => {
   const providers = await getProviders();

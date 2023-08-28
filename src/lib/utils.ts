@@ -11,3 +11,12 @@ export function generateUsernameFromEmail(email: string) {
     .toLowerCase()
     .replace(/[^a-zA-Z0-9-_.]/g, "");
 }
+
+export function generateInitials(name: string) {
+  return name
+    .toUpperCase()
+    .split(" ")
+    .slice(0, 2)
+    .map((x) => x.at(0))
+    .join("");
+}
