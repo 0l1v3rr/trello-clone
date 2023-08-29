@@ -68,7 +68,11 @@ const LoginForm = () => {
             <FormItem>
               <FormLabel>E-mail or username</FormLabel>
               <FormControl>
-                <Input placeholder="johndoe" {...field} />
+                <Input
+                  placeholder="johndoe"
+                  data-test-id="login-email"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -82,18 +86,29 @@ const LoginForm = () => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="*************" type="password" {...field} />
+                <Input
+                  placeholder="*************"
+                  type="password"
+                  data-test-id="login-password"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button variant="link" className="mx-auto w-fit" asChild>
+        <Button
+          variant="link"
+          className="mx-auto w-fit"
+          asChild
+          data-test-id="reg-btn"
+        >
           <Link href="/register">Don&apos;t have an account?</Link>
         </Button>
 
         <Button
+          data-test-id="login-submit-btn"
           type="submit"
           className="w-full"
           disabled={form.formState.isSubmitting}

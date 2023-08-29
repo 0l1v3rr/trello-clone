@@ -61,7 +61,11 @@ const RegistrationForm = () => {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="John Doe" {...field} />
+                <Input
+                  placeholder="John Doe"
+                  data-test-id="reg-name"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -75,7 +79,11 @@ const RegistrationForm = () => {
             <FormItem>
               <FormLabel>E-mail</FormLabel>
               <FormControl>
-                <Input placeholder="johndoe@example.com" {...field} />
+                <Input
+                  placeholder="johndoe@example.com"
+                  data-test-id="reg-email"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -89,7 +97,12 @@ const RegistrationForm = () => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="*************" type="password" {...field} />
+                <Input
+                  placeholder="*************"
+                  type="password"
+                  data-test-id="reg-password"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -103,14 +116,24 @@ const RegistrationForm = () => {
             <FormItem>
               <FormLabel>Password Confirmation</FormLabel>
               <FormControl>
-                <Input placeholder="*************" type="password" {...field} />
+                <Input
+                  placeholder="*************"
+                  type="password"
+                  data-test-id="reg-password-confirm"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button variant="link" className="mx-auto w-fit" asChild>
+        <Button
+          variant="link"
+          className="mx-auto w-fit"
+          asChild
+          data-test-id="login-btn"
+        >
           <Link href="/login">Already have an account?</Link>
         </Button>
 
@@ -118,6 +141,7 @@ const RegistrationForm = () => {
           type="submit"
           className="w-full"
           disabled={form.formState.isSubmitting}
+          data-test-id="reg-submit-btn"
         >
           {form.formState.isSubmitting && (
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />

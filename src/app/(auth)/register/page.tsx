@@ -10,7 +10,7 @@ import {
 import RegisterForm from "@/app/(auth)/register/registration-form";
 
 export const metadata: Metadata = {
-  title: "Login",
+  title: "Registration",
 };
 
 const LoginPage = async () => {
