@@ -41,6 +41,11 @@ async function main() {
       },
     ],
   });
+
+  await prisma.user.update({
+    where: { id: "user-1" },
+    data: { starredBoards: { connect: { id: "board-2" } } },
+  });
 }
 
 main()

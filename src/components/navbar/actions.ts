@@ -11,3 +11,13 @@ export async function getUserBoards(id: string) {
     },
   });
 }
+
+export async function getStarredBoards(id: string) {
+  return await prisma.board.findMany({
+    include: { owner: true },
+    orderBy: { updatedAt: "desc" },
+    where: {
+      starsGivenBy: { some: { id } },
+    },
+  });
+}

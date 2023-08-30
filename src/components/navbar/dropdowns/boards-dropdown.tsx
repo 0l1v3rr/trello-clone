@@ -1,9 +1,7 @@
 import React, { FC, useEffect, useState, useTransition } from "react";
 import Image from "next/image";
-import boardImage from "@/assets/board.svg";
 import { Board, User } from "@prisma/client";
 import { ChevronDown, Loader2 } from "lucide-react";
-import { type Session } from "next-auth";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -13,36 +11,41 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import BoardMenuItem from "@/components/boards/board-menu-item";
-import { getUserBoards } from "@/components/navbar/actions";
 
 export type BoardWithOwner = Board & { owner: User };
 
 interface BoardsDropdownProps {
-  user: Session["user"];
+  menuLabel: string;
+  getBoards: () => Promise<BoardWithOwner[]>;
+  image: any;
 }
 
-const BoardsDropdown: FC<BoardsDropdownProps> = ({ user }) => {
+const BoardsDropdown: FC<BoardsDropdownProps> = ({
+  menuLabel,
+  getBoards,
+  image,
+}) => {
   const [loading, startTransition] = useTransition();
   const [boards, setBoards] = useState<BoardWithOwner[]>([]);
 
   useEffect(() => {
     startTransition(async () => {
-      const boards = await getUserBoards(user.id);
+      const boards = await getBoards();
       setBoards(boards);
     });
-  }, [user.id]);
+  }, [getBoards]);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer" asChild>
         <Button variant="outline">
-          Boards
+          {menuLabel}
           <ChevronDown className="ml-3 h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="start">
-        <DropdownMenuLabel>Boards</DropdownMenuLabel>
+        <DropdownMenuLabel>{menuLabel}</DropdownMenuLabel>
 
         <DropdownMenuSeparator />
 
@@ -53,13 +56,13 @@ const BoardsDropdown: FC<BoardsDropdownProps> = ({ user }) => {
         ) : (
           <div className="p-2 text-center text-sm">
             <Image
-              src={boardImage}
+              src={image}
               alt="Board Image"
               width={220}
               height={120}
-              className="mb-2 h-[120px] rounded-md border object-cover"
+              className="mx-auto mb-2 h-[120px] rounded-md border object-cover"
             />
-            <span>You don&apos;t have any boards yet.</span>
+            <span>You don&apos;t have anything here yet.</span>
           </div>
         )}
       </DropdownMenuContent>

@@ -3,11 +3,13 @@
 import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import boardImage from "@/assets/board.svg";
 import logo from "@/assets/logo.svg";
+import starImage from "@/assets/star.svg";
 import type { Session } from "next-auth";
+import { getStarredBoards, getUserBoards } from "@/components/navbar/actions";
 import CreateButton from "@/components/navbar/create-button";
 import BoardsDropdown from "@/components/navbar/dropdowns/boards-dropdown";
-import StarredDropdown from "@/components/navbar/dropdowns/starred-dropdown";
 import { ThemeToggle } from "@/components/navbar/dropdowns/theme-toggle";
 import UserActions from "@/components/navbar/user-actions";
 
@@ -24,8 +26,16 @@ const Navbar: FC<NavbarProps> = ({ user }) => {
       </Link>
 
       <div className="flex items-center gap-3">
-        <BoardsDropdown user={user} />
-        <StarredDropdown />
+        <BoardsDropdown
+          image={boardImage}
+          menuLabel="Boards"
+          getBoards={() => getUserBoards(user.id)}
+        />
+        <BoardsDropdown
+          image={starImage}
+          menuLabel="Starred"
+          getBoards={() => getStarredBoards(user.id)}
+        />
         <CreateButton />
       </div>
 
