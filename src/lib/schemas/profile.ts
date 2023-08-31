@@ -6,5 +6,5 @@ export const profileSchema = z.object({
     .min(4, { message: "The name must be at least 4 characters." }),
   status: z
     .string()
-    .max(512, { message: "The status can be maximum 512 characters long." }),
+    .max(64, { message: "The status can be maximum 64 characters long." }),
 });

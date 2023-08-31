@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
-import Profile from "./_components/profile";
+import Profile from "@/app/(dashboard)/_components/profile";
 
 export const metadata: Metadata = {
   title: "Dashboard",

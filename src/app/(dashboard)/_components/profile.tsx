@@ -3,8 +3,8 @@ import { getServerSession } from "next-auth";
 import { cn, generateInitials } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ProfileDetails from "@/app/(dashboard)/_components/profile-details";
+import { getUserById } from "@/app/(dashboard)/actions";
 import { options } from "@/app/api/auth/[...nextauth]/options";
-import { getUserById } from "../actions";
 
 interface ProfileProps {
   className?: string;

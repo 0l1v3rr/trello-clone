@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
+import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { registerSchema } from "@/lib/schemas/register";
@@ -22,7 +22,6 @@ import { Input } from "@/components/ui/input";
 import { createUser } from "@/app/(auth)/register/actions";
 
 const RegistrationForm = () => {
-  const router = useRouter();
   const [error, setError] = useState<string>();
 
   const form = useForm<z.infer<typeof registerSchema>>({
@@ -37,10 +36,13 @@ const RegistrationForm = () => {
 
   const onSubmit = async (values: z.infer<typeof registerSchema>) => {
     try {
-      const res = await createUser(values);
-      router.push(
-        `/login?email=${encodeURI(res.email)}&successfulRegistration=true`
-      );
+      await createUser(values);
+      await signIn("credentials", {
+        username: values.email,
+        password: values.password,
+        callbackUrl: "/",
+        redirect: true,
+      });
     } catch (e: any) {
       setError(e.message);
     }

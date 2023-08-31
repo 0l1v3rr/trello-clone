@@ -57,10 +57,6 @@ const LoginForm = () => {
       >
         {error && <Alert variant="destructive">{error}</Alert>}
 
-        {params.get("successfulRegistration") && !error && (
-          <Alert variant="success">Successful registration!</Alert>
-        )}
-
         <FormField
           control={form.control}
           name="username"

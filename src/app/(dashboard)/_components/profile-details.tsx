@@ -3,7 +3,7 @@
 import { FC, useState } from "react";
 import { type Session } from "next-auth";
 import { Button } from "@/components/ui/button";
-import EditProfile from "./edit-profile";
+import EditProfile from "@/app/(dashboard)/_components/edit-profile";
 
 interface ProfileDetailsProps {
   user: Session["user"];
