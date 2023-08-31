@@ -1,11 +1,9 @@
 import * as z from "zod";
+import { profileSchema } from "./profile";
 
 export const registerSchema = z
   .object({
-    name: z.string().regex(/^[a-zA-Z\s]{4,128}$/, {
-      message:
-        "The name must contain at least 4 characters, and only contain english letters",
-    }),
+    name: profileSchema.shape.name,
     email: z.string().email({ message: "The email is not valid" }),
     password: z
       .string()
