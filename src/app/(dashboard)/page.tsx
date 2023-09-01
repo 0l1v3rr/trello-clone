@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
-import { Button } from "@/components/ui/button";
-import Profile from "@/app/(dashboard)/_components/profile";
+import Boards from "@/app/(dashboard)/_components/boards/boards";
+import Profile from "@/app/(dashboard)/_components/profile/profile";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const HomePage = () => {
   return (
-    <main className="flex items-start gap-8 px-16 py-8">
+    <main className="flex items-start gap-16 p-16">
       <Profile />
-      <Button>Hello</Button>
+      <Boards />
     </main>
   );
 };

@@ -6,14 +6,23 @@ const prisma = new PrismaClient();
 async function main() {
   const password = await bcrypt.hash("test", 10);
 
-  await prisma.user.create({
-    data: {
-      id: "user-1",
-      email: "test@gmail.com",
-      name: "Test User",
-      username: "test",
-      password,
-    },
+  await prisma.user.createMany({
+    data: [
+      {
+        id: "user-1",
+        email: "test@gmail.com",
+        name: "Test User",
+        username: "test",
+        password,
+      },
+      {
+        id: "user-2",
+        email: "john@gmail.com",
+        name: "John Doe",
+        username: "john",
+        password,
+      },
+    ],
   });
 
   //https://source.unsplash.com/random?landscape
@@ -39,12 +48,23 @@ async function main() {
             "https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8bGFuZHNjYXBlfHx8fHx8MTY5MzIyNjY3Mg&ixlib=rb-4.0.3&q=80&w=1080",
         },
       },
+      {
+        id: "board-3",
+        name: "Test Board 3",
+        slug: "test-board-3",
+        ownerId: "user-2",
+        public: false,
+        image: { type: "color", value: "#e67e22" },
+      },
     ],
   });
 
   await prisma.user.update({
     where: { id: "user-1" },
-    data: { starredBoards: { connect: { id: "board-2" } } },
+    data: {
+      starredBoards: { connect: { id: "board-2" } },
+      guestBoards: { connect: { id: "board-3" } },
+    },
   });
 }
 

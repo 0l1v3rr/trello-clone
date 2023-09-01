@@ -4,7 +4,7 @@ import React, { FC } from "react";
 import { useAuthContext } from "@/context/auth-context";
 import { cn, generateInitials } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import ProfileDetails from "@/app/(dashboard)/_components/profile-details";
+import ProfileDetails from "@/app/(dashboard)/_components/profile/profile-details";
 
 interface ProfileProps {
   className?: string;

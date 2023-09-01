@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from "@/context/auth-context";
 import { Button } from "@/components/ui/button";
-import EditProfile from "@/app/(dashboard)/_components/edit-profile";
+import EditProfile from "@/app/(dashboard)/_components/profile/edit-profile";
 
 const ProfileDetails = () => {
   const { user } = useAuthContext();
@@ -16,7 +16,7 @@ const ProfileDetails = () => {
   return (
     <>
       <div>
-        <h1 className="text-3xl font-semibold text-white">{user.name}</h1>
+        <h1 className="text-4xl font-semibold text-white">{user.name}</h1>
         <h3 className="text-muted-foreground">{user.email}</h3>
       </div>
 

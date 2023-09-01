@@ -60,7 +60,7 @@ const BoardsDropdown: FC<BoardsDropdownProps> = ({
               alt="Board Image"
               width={220}
               height={120}
-              className="mx-auto mb-2 h-[120px] rounded-md border object-cover"
+              className="mx-auto mb-2 h-[120px] rounded-md object-cover"
             />
             <span>You don&apos;t have anything here yet.</span>
           </div>
