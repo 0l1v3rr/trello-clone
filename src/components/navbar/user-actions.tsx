@@ -1,7 +1,6 @@
-import { FC } from "react";
 import { useRouter } from "next/navigation";
-import { LogOut, User } from "lucide-react";
-import type { Session } from "next-auth";
+import { useAuthContext } from "@/context/auth-context";
+import { Lock, LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { generateInitials } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -14,12 +13,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-interface UserActionsProps {
-  user: Session["user"];
-}
-
-const UserActions: FC<UserActionsProps> = ({ user }) => {
+const UserActions = () => {
   const router = useRouter();
+  const { user } = useAuthContext();
 
   return (
     <DropdownMenu>
@@ -51,8 +47,8 @@ const UserActions: FC<UserActionsProps> = ({ user }) => {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem onClick={() => router.push("/profile")}>
-          <User className="mr-2 h-4 w-4" />
-          <span>Profile</span>
+          <Lock className="mr-2 h-4 w-4" />
+          <span>{user.password ? "Change password" : "Create password"}</span>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => signOut()}>
           <LogOut className="mr-2 h-4 w-4" />

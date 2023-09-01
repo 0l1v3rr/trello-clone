@@ -1,18 +1,17 @@
+"use client";
+
 import React, { FC } from "react";
-import { getServerSession } from "next-auth";
+import { useAuthContext } from "@/context/auth-context";
 import { cn, generateInitials } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ProfileDetails from "@/app/(dashboard)/_components/profile-details";
-import { getUserById } from "@/app/(dashboard)/actions";
-import { options } from "@/app/api/auth/[...nextauth]/options";
 
 interface ProfileProps {
   className?: string;
 }
 
-const Profile: FC<ProfileProps> = async ({ className }) => {
-  const session = (await getServerSession(options))!;
-  const user = await getUserById(session.user.id);
+const Profile: FC<ProfileProps> = ({ className }) => {
+  const { user } = useAuthContext();
 
   return (
     <aside
@@ -25,7 +24,7 @@ const Profile: FC<ProfileProps> = async ({ className }) => {
         </AvatarFallback>
       </Avatar>
 
-      <ProfileDetails user={user} />
+      <ProfileDetails />
     </aside>
   );
 };

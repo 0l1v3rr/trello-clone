@@ -1,15 +1,10 @@
-"use client";
-
-import { FC, useState } from "react";
-import { type Session } from "next-auth";
+import { useState } from "react";
+import { useAuthContext } from "@/context/auth-context";
 import { Button } from "@/components/ui/button";
 import EditProfile from "@/app/(dashboard)/_components/edit-profile";
 
-interface ProfileDetailsProps {
-  user: Session["user"];
-}
-
-const ProfileDetails: FC<ProfileDetailsProps> = ({ user }) => {
+const ProfileDetails = () => {
+  const { user } = useAuthContext();
   const [editMode, setEditMode] = useState(false);
 
   if (editMode) {
