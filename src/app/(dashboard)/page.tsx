@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 
 const HomePage = () => {
   return (
-    <main className="flex items-start gap-16 p-16">
-      <Profile />
+    <main className="flex flex-col items-start gap-16 p-8 sm:flex-row sm:p-16">
+      <Profile className="w-full sm:w-[18rem]" />
       <Boards />
     </main>
   );

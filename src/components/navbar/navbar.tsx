@@ -16,8 +16,11 @@ const Navbar = () => {
   const { user } = useAuthContext();
 
   return (
-    <nav className="flex w-full items-center gap-8 border-b border-border bg-background px-8 py-4">
-      <Link href="/" className="flex items-center gap-3 text-xl font-semibold">
+    <nav className="flex w-full items-center gap-4 border-b border-border bg-background px-8 py-4 sm:gap-8">
+      <Link
+        href="/"
+        className="hidden items-center gap-3 text-xl font-semibold md:flex"
+      >
         <Image width={38} height={38} src={logo} alt="Logo" />
         Trello Clone
       </Link>
