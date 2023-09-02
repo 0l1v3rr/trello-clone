@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { JsonImage } from "@/types/board";
+import { BoardBackground } from "@/lib/schemas/board";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { BoardWithOwner } from "@/components/navbar/dropdowns/boards-dropdown";
 
@@ -11,7 +11,7 @@ interface BoardMenuItemProps {
 
 const BoardMenuItem: FC<BoardMenuItemProps> = ({ board }) => {
   const router = useRouter();
-  const image = board.image as unknown as JsonImage;
+  const image = board.background as unknown as BoardBackground;
 
   return (
     <DropdownMenuItem

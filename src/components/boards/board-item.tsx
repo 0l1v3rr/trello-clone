@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { JsonImage } from "@/types/board";
+import { BoardBackground } from "@/lib/schemas/board";
 import { BoardWithOwner } from "../navbar/dropdowns/boards-dropdown";
 
 interface BoardItemProps {
@@ -9,7 +9,7 @@ interface BoardItemProps {
 }
 
 const BoardItem: FC<BoardItemProps> = ({ board }) => {
-  const image = board.image as unknown as JsonImage;
+  const image = board.background as unknown as BoardBackground;
 
   return (
     <Link

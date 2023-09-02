@@ -35,7 +35,7 @@ model Board {
   id           String   @id @default(uuid())
   name         String
   slug         String
-  image        Json
+  background   Json
   public       Boolean
   owner        User     @relation("OwnedBoards", fields: [ownerId], references: [id])
   ownerId      String

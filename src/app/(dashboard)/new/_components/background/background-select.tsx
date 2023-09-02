@@ -1,12 +1,12 @@
-import { FC, useEffect, useState } from "react";
-import { JsonImage } from "@/types/board";
+import { FC, useState } from "react";
+import { BoardBackground } from "@/lib/schemas/board";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ColorPicker from "@/app/(dashboard)/new/_components/background/color-picker";
 import ImagePicker from "@/app/(dashboard)/new/_components/background/image-picker";
 
 interface BackgroundSelectProps {
-  value: JsonImage;
-  onChange: (value: JsonImage) => void;
+  value: BoardBackground;
+  onChange: (value: BoardBackground) => void;
 }
 
 type Type = "color" | "image";

@@ -21,8 +21,8 @@ export async function createBoard(
     throw new Error("Board with this slug already exist");
   }
 
-  const background = board.image as unknown as Prisma.JsonArray;
+  const background = board.background as unknown as Prisma.JsonArray;
   return await prisma.board.create({
-    data: { ...board, image: background, ownerId: userId },
+    data: { ...board, background: background, ownerId: userId },
   });
 }

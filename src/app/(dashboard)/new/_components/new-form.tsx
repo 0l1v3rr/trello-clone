@@ -40,7 +40,7 @@ const NewForm = () => {
       name: "",
       slug: "",
       public: true,
-      image: { type: "color", value: generateRandomHex() },
+      background: { type: "color", value: generateRandomHex() },
     },
   });
 
@@ -121,7 +121,7 @@ const NewForm = () => {
 
         <FormField
           control={form.control}
-          name="image"
+          name="background"
           render={({ field }) => (
             <FormItem className="w-full">
               <FormLabel>Background</FormLabel>

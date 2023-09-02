@@ -1,5 +1,7 @@
 import * as z from "zod";
 
+export type BoardBackground = z.infer<typeof boardSchema.shape.background>;
+
 export const boardSchema = z.object({
   name: z
     .string()
@@ -11,7 +13,7 @@ export const boardSchema = z.object({
     .max(64, { message: "The slug can be maximum 64 characters" })
     .regex(/^([a-z][a-z0-9]*)(-[a-z0-9]+)*$/),
   public: z.boolean(),
-  image: z.object({
+  background: z.object({
     type: z.enum(["color", "image"]),
     value: z.string(),
   }),

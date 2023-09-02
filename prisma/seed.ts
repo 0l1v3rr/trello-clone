@@ -34,7 +34,7 @@ async function main() {
         slug: "test-board",
         ownerId: "user-1",
         public: true,
-        image: { type: "color", value: "#1abc9c" },
+        background: { type: "color", value: "#1abc9c" },
       },
       {
         id: "board-2",
@@ -42,7 +42,7 @@ async function main() {
         slug: "test-board-2",
         ownerId: "user-1",
         public: false,
-        image: {
+        background: {
           type: "image",
           value:
             "https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8bGFuZHNjYXBlfHx8fHx8MTY5MzIyNjY3Mg&ixlib=rb-4.0.3&q=80&w=1080",
@@ -54,7 +54,7 @@ async function main() {
         slug: "test-board-3",
         ownerId: "user-2",
         public: false,
-        image: { type: "color", value: "#e67e22" },
+        background: { type: "color", value: "#e67e22" },
       },
     ],
   });
