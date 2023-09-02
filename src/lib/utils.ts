@@ -20,3 +20,14 @@ export function generateInitials(name: string) {
     .map((x) => x.at(0))
     .join("");
 }
+
+export function slugify(s: string) {
+  return s
+    .toLowerCase()
+    .replace(/[^a-z0-9-\s]/g, "")
+    .replace(/[\s]/g, "-");
+}
+
+export function generateRandomHex() {
+  return `#${((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0")}`;
+}

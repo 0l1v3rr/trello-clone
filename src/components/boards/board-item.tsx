@@ -33,7 +33,7 @@ const BoardItem: FC<BoardItemProps> = ({ board }) => {
         />
       )}
 
-      <h3 className="absolute left-4 top-2 text-xl font-semibold text-white">
+      <h3 className="pointer-events-none absolute left-4 top-2 text-xl font-semibold text-white">
         {board.name}
       </h3>
     </Link>

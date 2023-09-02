@@ -21,7 +21,7 @@ const Navbar = () => {
         href="/"
         className="hidden items-center gap-3 text-xl font-semibold md:flex"
       >
-        <Image width={38} height={38} src={logo} alt="Logo" />
+        <Image width={38} height={38} src={logo} alt="Logo" priority />
         Trello Clone
       </Link>
 
