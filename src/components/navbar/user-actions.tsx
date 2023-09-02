@@ -46,7 +46,7 @@ const UserActions = () => {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem onClick={() => router.push("/profile")}>
+        <DropdownMenuItem onClick={() => router.push("/settings/password")}>
           <Lock className="mr-2 h-4 w-4" />
           <span>{user.password ? "Change password" : "Create password"}</span>
         </DropdownMenuItem>

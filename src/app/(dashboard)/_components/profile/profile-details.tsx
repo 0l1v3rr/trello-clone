@@ -16,11 +16,11 @@ const ProfileDetails = () => {
   return (
     <>
       <div>
-        <h1 className="text-4xl font-semibold text-white">{user.name}</h1>
+        <h1 className="text-4xl font-semibold">{user.name}</h1>
         <h3 className="text-muted-foreground">{user.email}</h3>
       </div>
 
-      {user.status && <div className="">{user.status}</div>}
+      {user.status && <div>{user.status}</div>}
 
       <Button
         variant="secondary"

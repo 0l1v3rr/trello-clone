@@ -19,14 +19,12 @@ const Boards: FC<BoardsProps> = async ({ className }) => {
 
   return (
     <div className={cn("flex w-full flex-col gap-4", className)}>
-      <h2 className="text-2xl font-semibold uppercase text-white">
-        Your Boards
-      </h2>
+      <h2 className="text-2xl font-semibold uppercase">Your Boards</h2>
       <BoardList boards={userBoards} showCreateBoardBtn />
 
       {guestBoards.length > 0 && (
         <>
-          <h2 className="mt-32 text-2xl font-semibold uppercase text-white">
+          <h2 className="mt-32 text-2xl font-semibold uppercase">
             Guest Boards
           </h2>
           <BoardList boards={guestBoards} />
