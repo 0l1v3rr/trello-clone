@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
 import { type Session } from "next-auth";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -15,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import LoadingButton from "@/components/ui/loading-button";
 import { Textarea } from "@/components/ui/textarea";
 import { updateUser } from "@/app/(dashboard)/actions";
 
@@ -75,16 +75,13 @@ const EditProfile: FC<EditProfileProps> = ({ user, onEditModeExit }) => {
         />
 
         <div className="flex items-center justify-start gap-2">
-          <Button
+          <LoadingButton
             type="submit"
-            disabled={form.formState.isSubmitting}
+            loading={form.formState.isSubmitting}
             size="sm"
           >
-            {form.formState.isSubmitting && (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            )}
             Submit
-          </Button>
+          </LoadingButton>
           <Button
             type="button"
             variant="secondary"

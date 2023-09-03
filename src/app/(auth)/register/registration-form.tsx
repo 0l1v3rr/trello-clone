@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -19,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import LoadingButton from "@/components/ui/loading-button";
 import { createUser } from "@/app/(auth)/register/actions";
 
 const RegistrationForm = () => {
@@ -139,17 +139,14 @@ const RegistrationForm = () => {
           <Link href="/login">Already have an account?</Link>
         </Button>
 
-        <Button
+        <LoadingButton
           type="submit"
           className="w-full"
-          disabled={form.formState.isSubmitting}
+          loading={form.formState.isSubmitting}
           data-test-id="reg-submit-btn"
         >
-          {form.formState.isSubmitting && (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          )}
           Submit
-        </Button>
+        </LoadingButton>
       </form>
     </Form>
   );

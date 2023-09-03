@@ -8,7 +8,6 @@ import {
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/auth-context";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { boardSchema } from "@/lib/schemas/board";
@@ -25,6 +24,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import LoadingButton from "@/components/ui/loading-button";
 import { Switch } from "@/components/ui/switch";
 import BackgroundSelect from "@/app/(dashboard)/new/_components/background/background-select";
 import { createBoard } from "@/app/(dashboard)/new/actions";
@@ -135,12 +135,9 @@ const NewForm = () => {
           )}
         />
 
-        <Button type="submit" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting && (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          )}
+        <LoadingButton type="submit" loading={form.formState.isSubmitting}>
           Submit
-        </Button>
+        </LoadingButton>
       </form>
     </Form>
   );

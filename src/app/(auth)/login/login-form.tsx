@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -20,6 +19,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import LoadingButton from "@/components/ui/loading-button";
 
 const LoginForm = () => {
   const params = useSearchParams();
@@ -103,17 +103,14 @@ const LoginForm = () => {
           <Link href="/register">Don&apos;t have an account?</Link>
         </Button>
 
-        <Button
+        <LoadingButton
           data-test-id="login-submit-btn"
           type="submit"
           className="w-full"
-          disabled={form.formState.isSubmitting}
+          loading={form.formState.isSubmitting}
         >
-          {form.formState.isSubmitting && (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          )}
           Submit
-        </Button>
+        </LoadingButton>
       </form>
     </Form>
   );
