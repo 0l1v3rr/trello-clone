@@ -1,4 +1,9 @@
+import { Metadata } from "next";
 import NewForm from "@/app/(dashboard)/new/_components/new-form";
+
+export const metadata: Metadata = {
+  title: "New Board",
+};
 
 const NewPage = () => {
   return (

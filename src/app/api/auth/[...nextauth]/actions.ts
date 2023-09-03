@@ -1,6 +1,11 @@
 import * as bcrypt from "bcrypt";
 import { prisma } from "@/lib/prisma";
-import { generateUsernameFromEmail } from "@/lib/utils";
+import {
+  generateRandomHex,
+  generateUsernameFromEmail,
+  slugify,
+} from "@/lib/utils";
+import { createBoard } from "@/app/(dashboard)/new/actions";
 
 interface SsoCredentials {
   name: string;
@@ -20,7 +25,7 @@ export async function createSsoUser(credentials: SsoCredentials) {
 
   if (user) return user;
 
-  return await prisma.user.create({
+  const newUser = await prisma.user.create({
     data: {
       email: credentials.email,
       name: credentials.name,
@@ -28,6 +33,15 @@ export async function createSsoUser(credentials: SsoCredentials) {
       image: credentials.avatar,
     },
   });
+
+  await createBoard(newUser.id, {
+    name: `${newUser.name}'s Board`,
+    slug: `${slugify(newUser.name)}s-board`,
+    public: false,
+    background: { type: "color", value: generateRandomHex() },
+  });
+
+  return newUser;
 }
 
 export async function login(credentials: LoginCredentials) {

@@ -4,7 +4,12 @@ import * as bcrypt from "bcrypt";
 import * as z from "zod";
 import { prisma } from "@/lib/prisma";
 import { registerSchema } from "@/lib/schemas/register";
-import { generateUsernameFromEmail } from "@/lib/utils";
+import {
+  generateRandomHex,
+  generateUsernameFromEmail,
+  slugify,
+} from "@/lib/utils";
+import { createBoard } from "@/app/(dashboard)/new/actions";
 
 export async function createUser(user: z.infer<typeof registerSchema>) {
   const res = registerSchema.safeParse(user);
@@ -22,11 +27,20 @@ export async function createUser(user: z.infer<typeof registerSchema>) {
   const { passwordConfirmation, ...data } = user;
 
   const password = await bcrypt.hash(data.password, 10);
-  return await prisma.user.create({
+  const newUser = await prisma.user.create({
     data: {
       ...data,
       username: generateUsernameFromEmail(data.email),
       password,
     },
   });
+
+  await createBoard(newUser.id, {
+    name: `${newUser.name}'s Board`,
+    slug: `${slugify(newUser.name)}s-board`,
+    public: false,
+    background: { type: "color", value: generateRandomHex() },
+  });
+
+  return newUser;
 }
