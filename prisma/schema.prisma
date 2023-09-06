@@ -41,9 +41,51 @@ model Board {
   ownerId      String
   members      User[]   @relation("GuestBoards")
   starsGivenBy User[]   @relation("StarredBoards")
+  labels       Label[]
+  lists        List[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
   @@unique([slug, ownerId])
   @@map(name: "boards")
+}
+
+model Label {
+  id        String   @id @default(uuid())
+  title     String
+  color     String
+  board     Board    @relation(fields: [boardId], references: [id])
+  boardId   String
+  cards     Card[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map(name: "labels")
+}
+
+model List {
+  id        String   @id @default(uuid())
+  board     Board    @relation(fields: [boardId], references: [id])
+  title     String
+  boardId   String
+  position  Int
+  cards     Card[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map(name: "lists")
+}
+
+model Card {
+  id          String   @id @default(uuid())
+  title       String
+  description String?  @db.LongText
+  position    Int
+  labels      Label[]
+  list        List     @relation(fields: [listId], references: [id])
+  listId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map(name: "cards")
 }

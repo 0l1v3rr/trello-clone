@@ -25,7 +25,6 @@ async function main() {
     ],
   });
 
-  //https://source.unsplash.com/random?landscape
   await prisma.board.createMany({
     data: [
       {
@@ -64,6 +63,48 @@ async function main() {
     data: {
       starredBoards: { connect: { id: "board-2" } },
       guestBoards: { connect: { id: "board-3" } },
+    },
+  });
+
+  await prisma.label.createMany({
+    data: [
+      {
+        id: "label-1",
+        title: "Backend",
+        color: "#6622cc",
+        boardId: "board-2",
+      },
+      {
+        id: "label-2",
+        title: "Frontend",
+        color: "#22ccaa",
+        boardId: "board-2",
+      },
+    ],
+  });
+
+  await prisma.list.create({
+    data: {
+      id: "list-1",
+      position: 1,
+      title: "Backlog",
+      boardId: "board-2",
+      cards: {
+        create: [
+          {
+            title: "Test card",
+            description: "This is a test card with <b>HTML</b> formatting.",
+            position: 1,
+            labels: {
+              connect: [{ id: "label-1" }, { id: "label-2" }],
+            },
+          },
+          {
+            title: "Another test card",
+            position: 2,
+          },
+        ],
+      },
     },
   });
 }
