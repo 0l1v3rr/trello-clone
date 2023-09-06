@@ -16,7 +16,7 @@ const Navbar = () => {
   const { user } = useAuthContext();
 
   return (
-    <nav className="flex w-full items-center gap-4 border-b border-border bg-background px-8 py-4 sm:gap-8">
+    <nav className="flex h-[4.56rem] w-full items-center gap-4 border-b border-border bg-background px-8 py-4 sm:gap-8">
       <Link
         href="/"
         className="hidden items-center gap-3 text-xl font-semibold md:flex"
