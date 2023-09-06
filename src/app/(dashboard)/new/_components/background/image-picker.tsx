@@ -21,7 +21,9 @@ const ImagePicker: FC<ImagePickerProps> = ({ value, onChange }) => {
 
   const getRandomImage = useCallback(() => {
     startTransition(async () => {
-      const res = await fetch("https://source.unsplash.com/random?landscape");
+      const res = await fetch(
+        "https://source.unsplash.com/random/1920x1080?landscape,wallpaper,background"
+      );
       onChange(res.url);
     });
   }, [onChange]);

@@ -55,7 +55,7 @@ const NewForm = () => {
   const onSubmit = async (values: z.infer<typeof boardSchema>) => {
     try {
       const createdBoard = await createBoard(user.id, values);
-      router.push(`/${user.id}/${createdBoard.slug}`);
+      router.push(`/${user.username}/${createdBoard.slug}`);
     } catch (e: any) {
       setError(e.message);
     }
@@ -76,7 +76,7 @@ const NewForm = () => {
             <FormItem className="w-full">
               <FormLabel>Board name</FormLabel>
               <FormControl>
-                <Input placeholder="Test Board" {...field} />
+                <Input autoComplete="off" placeholder="Test Board" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -66,6 +66,13 @@ async function main() {
     },
   });
 
+  await prisma.user.update({
+    where: { id: "user-2" },
+    data: {
+      guestBoards: { connect: { id: "board-2" } },
+    },
+  });
+
   await prisma.label.createMany({
     data: [
       {

@@ -5,7 +5,7 @@ const nextConfig = {
     serverComponentsExternalPackages: ["@prisma/client", "bcrypt"],
   },
   images: {
-    domains: ["images.unsplash.com"],
+    domains: ["images.unsplash.com", "plus.unsplash.com"],
   },
 };
 
