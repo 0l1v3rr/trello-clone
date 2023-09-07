@@ -4,6 +4,7 @@ import { BoardBackground } from "@/lib/schemas/board";
 import { findBoardByUsernameAndSlug } from "@/app/(dashboard)/[username]/[boardSlug]/actions";
 import Background from "./_components/background";
 import BoardHeader from "./_components/header/board-header";
+import ListItem from "./_components/list/list-item";
 
 export interface BoardDetail extends Board {
   owner: User;
@@ -29,9 +30,14 @@ const BoardPage: FC<BoardPageProps> = async ({ params }) => {
   return (
     <main className="relative h-[calc(100vh_-_4.56rem)] w-full overflow-x-auto overflow-y-hidden">
       <Background background={background} />
-      <div className="absolute left-0 top-0 isolate z-10 w-full text-white">
+      <div className="absolute left-0 top-0 isolate z-10 flex h-full w-full flex-col text-white">
         <BoardHeader board={board} />
-        content
+
+        <div className="flex h-full flex-1 items-start gap-6 overflow-y-auto overflow-x-hidden p-6">
+          {board.lists.map((list) => (
+            <ListItem key={list.id} list={list} />
+          ))}
+        </div>
       </div>
     </main>
   );

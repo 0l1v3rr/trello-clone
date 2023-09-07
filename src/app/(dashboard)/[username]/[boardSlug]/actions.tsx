@@ -11,6 +11,13 @@ export async function findBoardByUsernameAndSlug(
 
   return await prisma.board.findUniqueOrThrow({
     where: { slug_ownerId: { slug: boardSlug, ownerId: owner.id } },
-    include: { members: true, owner: true, labels: true, lists: true },
+    include: {
+      members: true,
+      owner: true,
+      labels: true,
+      lists: {
+        orderBy: { position: "desc" },
+      },
+    },
   });
 }

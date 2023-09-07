@@ -56,4 +56,7 @@
   body {
     @apply min-h-screen bg-background text-foreground;
   }
+  img {
+    @apply select-none;
+  }
 }
