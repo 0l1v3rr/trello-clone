@@ -1,7 +1,8 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { BoardDetail } from "./page";
+import { BoardDetail } from "@/app/(dashboard)/[username]/[boardSlug]/page";
 
 export async function findBoardByUsernameAndSlug(
   username: string,
@@ -16,8 +17,26 @@ export async function findBoardByUsernameAndSlug(
       owner: true,
       labels: true,
       lists: {
-        orderBy: { position: "desc" },
+        orderBy: { position: "asc" },
       },
     },
   });
+}
+
+export async function createList(
+  boardId: string,
+  title: string,
+  position: number,
+  path: string
+) {
+  const list = await prisma.list.create({
+    data: {
+      position,
+      title,
+      boardId,
+    },
+  });
+
+  revalidatePath(path);
+  return list;
 }

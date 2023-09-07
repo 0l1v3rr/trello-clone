@@ -1,10 +1,11 @@
 import { FC } from "react";
 import { Board, Label, List, User } from "@prisma/client";
 import { BoardBackground } from "@/lib/schemas/board";
+import Background from "@/app/(dashboard)/[username]/[boardSlug]/_components/background";
+import BoardHeader from "@/app/(dashboard)/[username]/[boardSlug]/_components/header/board-header";
+import ListItem from "@/app/(dashboard)/[username]/[boardSlug]/_components/list/list-item";
+import NewList from "@/app/(dashboard)/[username]/[boardSlug]/_components/list/new-list";
 import { findBoardByUsernameAndSlug } from "@/app/(dashboard)/[username]/[boardSlug]/actions";
-import Background from "./_components/background";
-import BoardHeader from "./_components/header/board-header";
-import ListItem from "./_components/list/list-item";
 
 export interface BoardDetail extends Board {
   owner: User;
@@ -33,10 +34,11 @@ const BoardPage: FC<BoardPageProps> = async ({ params }) => {
       <div className="absolute left-0 top-0 isolate z-10 flex h-full w-full flex-col text-white">
         <BoardHeader board={board} />
 
-        <div className="flex h-full flex-1 items-start gap-6 overflow-y-auto overflow-x-hidden p-6">
+        <div className="flex h-full flex-1 items-start gap-6 overflow-x-auto p-6">
           {board.lists.map((list) => (
             <ListItem key={list.id} list={list} />
           ))}
+          <NewList board={board} />
         </div>
       </div>
     </main>
