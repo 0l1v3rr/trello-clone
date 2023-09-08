@@ -15,7 +15,7 @@ interface ListItemProps {
 
 const ListItem: FC<ListItemProps> = ({ list }) => {
   return (
-    <Card className="flex h-full w-[300px] flex-col">
+    <Card className="flex h-full min-w-[300px] max-w-[300px] flex-col">
       <CardHeader className="px-4 py-3">
         <CardTitle className="text-lg">{list.title}</CardTitle>
       </CardHeader>

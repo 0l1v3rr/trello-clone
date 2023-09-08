@@ -48,7 +48,7 @@ const NewList: FC<NewListProps> = ({ board }) => {
   if (mode === "button") {
     return (
       <Button
-        className="w-[300px]"
+        className="min-w-[300px] max-w-[300px]"
         size="lg"
         variant="secondary"
         onClick={() => setMode("form")}
@@ -62,7 +62,7 @@ const NewList: FC<NewListProps> = ({ board }) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <Card className="w-[300px]">
+        <Card className="min-w-[300px] max-w-[300px]">
           <CardContent className="px-4 pb-2 pt-4">
             <FormField
               control={form.control}
@@ -72,6 +72,7 @@ const NewList: FC<NewListProps> = ({ board }) => {
                   <FormControl>
                     <Input
                       autoFocus
+                      autoComplete="off"
                       placeholder="Enter list title"
                       {...field}
                     />
