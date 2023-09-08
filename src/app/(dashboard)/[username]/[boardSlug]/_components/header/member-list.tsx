@@ -28,7 +28,7 @@ const MemberList: FC<MemberListProps> = ({ owner, members }) => {
 
 const Member = ({ user, owner }: { user: User; owner: boolean }) => {
   return (
-    <HoverCard>
+    <HoverCard openDelay={200} closeDelay={0}>
       <HoverCardTrigger asChild>
         <Avatar className="cursor-pointer">
           <AvatarImage src={user.image ?? undefined} alt={user.name} />

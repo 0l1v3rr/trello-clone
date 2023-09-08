@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, Suspense } from "react";
 import { List } from "@prisma/client";
 import {
   Card,
@@ -7,7 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import CardSkeleton from "@/app/(dashboard)/[username]/[boardSlug]/_components/card/card-skeleton";
+import CardsArea from "@/app/(dashboard)/[username]/[boardSlug]/_components/list/cards-area";
 
 interface ListItemProps {
   list: List;
@@ -19,8 +20,10 @@ const ListItem: FC<ListItemProps> = ({ list }) => {
       <CardHeader className="px-4 py-3">
         <CardTitle className="text-lg">{list.title}</CardTitle>
       </CardHeader>
-      <CardContent className="flex-1 p-2">
-        <ScrollArea className="h-full"></ScrollArea>
+      <CardContent className="flex-1 overflow-hidden p-2">
+        <Suspense fallback={<CardSkeleton />}>
+          <CardsArea listId={list.id} />
+        </Suspense>
       </CardContent>
       <CardFooter className="px-4 py-3">
         <p>Add card</p>

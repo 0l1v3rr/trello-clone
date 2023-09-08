@@ -40,3 +40,11 @@ export async function createList(
   revalidatePath(path);
   return list;
 }
+
+export async function getCardsByList(listId: string) {
+  return await prisma.card.findMany({
+    where: { listId: listId },
+    orderBy: { position: "asc" },
+    include: { labels: true },
+  });
+}
