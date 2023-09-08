@@ -2,10 +2,11 @@
 
 import { FC, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { List } from "@prisma/client";
 import { Plus, X } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { listSchema } from "@/lib/schemas/list";
+import { cardSchema } from "@/lib/schemas/card";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
@@ -15,34 +16,27 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import LoadingButton from "@/components/ui/loading-button";
-import { createList } from "@/app/(dashboard)/[username]/[boardSlug]/actions";
-import { BoardDetail } from "@/app/(dashboard)/[username]/[boardSlug]/page";
+import { Textarea } from "@/components/ui/textarea";
+import { createCard } from "@/app/(dashboard)/[username]/[boardSlug]/actions";
 
-interface NewListProps {
-  board: BoardDetail;
+interface NewCardProps {
+  list: List;
+  path: string;
 }
 
-const NewList: FC<NewListProps> = ({ board }) => {
+const NewCard: FC<NewCardProps> = ({ list, path }) => {
   const [mode, setMode] = useState<"form" | "button">("button");
 
-  const form = useForm<z.infer<typeof listSchema>>({
-    resolver: zodResolver(listSchema),
+  const form = useForm<z.infer<typeof cardSchema>>({
+    resolver: zodResolver(cardSchema),
     defaultValues: {
-      name: "",
+      title: "",
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof listSchema>) => {
-    await createList(
-      {
-        boardId: board.id,
-        position: (board.lists.at(-1)?.position ?? 0) + 1,
-        title: values.name,
-      },
-      `/${board.owner.username}/${board.slug}`
-    );
+  const onSubmit = async (values: z.infer<typeof cardSchema>) => {
+    createCard({ listId: list.id, title: values.title }, path);
     setMode("button");
     form.reset();
   };
@@ -50,32 +44,33 @@ const NewList: FC<NewListProps> = ({ board }) => {
   if (mode === "button") {
     return (
       <Button
-        className="min-w-[300px] max-w-[300px]"
+        className="w-full justify-start px-4"
         size="lg"
-        variant="secondary"
+        variant="ghost"
         onClick={() => setMode("form")}
       >
         <Plus className="mr-2 h-4 w-4" />
-        Add {board.lists.length === 0 ? "a" : "another"} list
+        Add a card
       </Button>
     );
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <Card className="min-w-[300px] max-w-[300px]">
-          <CardContent className="px-4 pb-2 pt-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+        <Card className="w-full border-none py-0">
+          <CardContent className="p-0">
             <FormField
               control={form.control}
-              name="name"
+              name="title"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
+                    <Textarea
                       autoFocus
                       autoComplete="off"
-                      placeholder="Enter list title"
+                      placeholder="Enter a title for this card"
+                      className="bg-secondary [box-shadow:_none_!important]"
                       {...field}
                     />
                   </FormControl>
@@ -84,9 +79,9 @@ const NewList: FC<NewListProps> = ({ board }) => {
               )}
             />
           </CardContent>
-          <CardFooter className="flex items-center gap-2 px-4 py-2">
+          <CardFooter className="mt-2 flex items-center gap-2 p-0">
             <LoadingButton size="sm" loading={form.formState.isSubmitting}>
-              Add list
+              Add card
             </LoadingButton>
             <Button
               size="icon"
@@ -103,4 +98,4 @@ const NewList: FC<NewListProps> = ({ board }) => {
   );
 };
 
-export default NewList;
+export default NewCard;

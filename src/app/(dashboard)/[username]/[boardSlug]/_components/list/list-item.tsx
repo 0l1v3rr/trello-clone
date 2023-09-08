@@ -9,12 +9,14 @@ import {
 } from "@/components/ui/card";
 import CardSkeleton from "@/app/(dashboard)/[username]/[boardSlug]/_components/card/card-skeleton";
 import CardsArea from "@/app/(dashboard)/[username]/[boardSlug]/_components/list/cards-area";
+import NewCard from "./new-card";
 
 interface ListItemProps {
   list: List;
+  path: string;
 }
 
-const ListItem: FC<ListItemProps> = ({ list }) => {
+const ListItem: FC<ListItemProps> = ({ list, path }) => {
   return (
     <Card className="flex h-full min-w-[300px] max-w-[300px] flex-col">
       <CardHeader className="px-4 py-3">
@@ -25,8 +27,8 @@ const ListItem: FC<ListItemProps> = ({ list }) => {
           <CardsArea listId={list.id} />
         </Suspense>
       </CardContent>
-      <CardFooter className="px-4 py-3">
-        <p>Add card</p>
+      <CardFooter className="p-2">
+        <NewCard path={path} list={list} />
       </CardFooter>
     </Card>
   );

@@ -24,9 +24,11 @@ export async function findBoardByUsernameAndSlug(
 }
 
 export async function createList(
-  boardId: string,
-  title: string,
-  position: number,
+  {
+    boardId,
+    title,
+    position,
+  }: { boardId: string; title: string; position: number },
   path: string
 ) {
   const list = await prisma.list.create({
@@ -39,6 +41,25 @@ export async function createList(
 
   revalidatePath(path);
   return list;
+}
+
+export async function createCard(
+  {
+    listId,
+    title,
+  }: {
+    listId: string;
+    title: string;
+  },
+  path: string
+) {
+  const cards = await getCardsByList(listId);
+  const card = await prisma.card.create({
+    data: { title, position: (cards.at(-1)?.position ?? 0) + 1, listId },
+  });
+
+  revalidatePath(path);
+  return card;
 }
 
 export async function getCardsByList(listId: string) {

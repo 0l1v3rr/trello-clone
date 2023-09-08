@@ -27,6 +27,7 @@ const BoardPage: FC<BoardPageProps> = async ({ params }) => {
     params.boardSlug
   );
   const background = board.background as unknown as BoardBackground;
+  const path = `/${params.username}/${params.boardSlug}`;
 
   return (
     <main className="relative h-[calc(100vh_-_4.56rem)] w-full overflow-x-auto overflow-y-hidden">
@@ -36,7 +37,7 @@ const BoardPage: FC<BoardPageProps> = async ({ params }) => {
 
         <div className="flex h-full flex-1 items-start gap-6 overflow-x-auto p-6">
           {board.lists.map((list) => (
-            <ListItem key={list.id} list={list} />
+            <ListItem key={list.id} list={list} path={path} />
           ))}
           <NewList board={board} />
         </div>
