@@ -1,4 +1,5 @@
 import { FC } from "react";
+import BoardContext from "@/context/board-context";
 import { Board, Label, List, User } from "@prisma/client";
 import { BoardBackground } from "@/lib/schemas/board";
 import Background from "@/app/(dashboard)/[username]/[boardSlug]/_components/background";
@@ -36,10 +37,12 @@ const BoardPage: FC<BoardPageProps> = async ({ params }) => {
         <BoardHeader board={board} />
 
         <div className="flex h-full flex-1 items-start gap-6 overflow-x-auto p-6">
-          {board.lists.map((list) => (
-            <ListItem key={list.id} list={list} path={path} />
-          ))}
-          <NewList board={board} />
+          <BoardContext>
+            {board.lists.map((list) => (
+              <ListItem key={list.id} list={list} path={path} />
+            ))}
+            <NewList board={board} />
+          </BoardContext>
         </div>
       </div>
     </main>
