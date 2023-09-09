@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { Card } from "@prisma/client";
 import { BoardDetail, ListDetail } from "@/types/board";
 import { prisma } from "@/lib/prisma";
 
@@ -80,4 +81,17 @@ export async function getCardsByList(listId: string) {
     orderBy: { position: "asc" },
     include: { labels: true },
   });
+}
+
+export async function updateCardPositions(
+  cards: Pick<Card, "id" | "position">[]
+) {
+  await Promise.all(
+    cards.map((card) =>
+      prisma.card.update({
+        where: { id: card.id },
+        data: { position: card.position },
+      })
+    )
+  );
 }

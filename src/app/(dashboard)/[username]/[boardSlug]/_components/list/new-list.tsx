@@ -21,7 +21,7 @@ import LoadingButton from "@/components/ui/loading-button";
 import { createList } from "@/app/(dashboard)/[username]/[boardSlug]/actions";
 
 const NewList = () => {
-  const { board, path } = useBoardContext();
+  const { board, lists, path } = useBoardContext();
   const [mode, setMode] = useState<"form" | "button">("button");
 
   const form = useForm<z.infer<typeof listSchema>>({
@@ -35,7 +35,7 @@ const NewList = () => {
     await createList(
       {
         boardId: board.id,
-        position: (board.lists.at(-1)?.position ?? 0) + 1,
+        position: (lists.at(-1)?.position ?? 0) + 1,
         title: values.name,
       },
       path
@@ -53,7 +53,7 @@ const NewList = () => {
         onClick={() => setMode("form")}
       >
         <Plus className="mr-2 h-4 w-4" />
-        Add {board.lists.length === 0 ? "a" : "another"} list
+        Add {lists.length === 0 ? "a" : "another"} list
       </Button>
     );
   }

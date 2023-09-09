@@ -19,9 +19,10 @@ const CardsArea: FC<CardsAreaProps> = ({ listId, cards }) => {
           className="h-full"
           scrollHideDelay={0}
         >
-          {cards.map((card) => (
-            <CardItem key={card.id} card={card} />
+          {cards.map((card, i) => (
+            <CardItem key={card.id} card={card} index={i} />
           ))}
+          {provided.placeholder}
         </ScrollArea>
       )}
     </Droppable>
