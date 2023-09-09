@@ -9,7 +9,10 @@ import {
 } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { BoardDetail, ListDetail } from "@/types/board";
-import { updateCardPositions } from "@/app/(dashboard)/[username]/[boardSlug]/actions";
+import {
+  updateCard,
+  updateCardPositions,
+} from "@/app/(dashboard)/[username]/[boardSlug]/actions";
 
 interface BoardContextProps {
   board: BoardDetail;
@@ -61,6 +64,7 @@ const BoardContextProvider: FC<BoardContextProviderProps> = ({
       );
 
       if (sourceList.id !== destList.id) {
+        updateCard(item.id, { listId: destList.id });
         updateCardPositions(
           destList.cards.map((x, i) => ({ id: x.id, position: i + 1 }))
         );

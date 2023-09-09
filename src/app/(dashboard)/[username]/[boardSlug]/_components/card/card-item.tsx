@@ -22,7 +22,7 @@ const CardItem: FC<CardItemProps> = ({ card, index }) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
           className={cn(
-            "flex h-fit w-full cursor-pointer select-none flex-col items-start gap-2 py-3 [&:not(:last-child)]:mb-2"
+            "mb-2 flex h-fit w-full cursor-pointer select-none flex-col items-start gap-2 py-3"
           )}
           variant="secondary"
           asChild

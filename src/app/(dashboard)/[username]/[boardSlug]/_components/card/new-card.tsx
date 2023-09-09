@@ -5,6 +5,7 @@ import { useBoardContext } from "@/context/board-context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { List } from "@prisma/client";
 import { Plus, X } from "lucide-react";
+import { resetServerContext } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { cardSchema } from "@/lib/schemas/card";
@@ -37,6 +38,7 @@ const NewCard: FC<NewCardProps> = ({ list }) => {
   });
 
   const onSubmit = async (values: z.infer<typeof cardSchema>) => {
+    resetServerContext();
     createCard({ listId: list.id, title: values.title }, path);
     setMode("button");
     form.reset();

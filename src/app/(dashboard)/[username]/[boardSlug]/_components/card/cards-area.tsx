@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { ListDetail } from "@/types/board";
+import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import CardItem from "@/app/(dashboard)/[username]/[boardSlug]/_components/card/card-item";
 
@@ -12,11 +13,14 @@ interface CardsAreaProps {
 const CardsArea: FC<CardsAreaProps> = ({ listId, cards }) => {
   return (
     <Droppable droppableId={listId}>
-      {(provided) => (
+      {(provided, { isDraggingOver }) => (
         <ScrollArea
           ref={provided.innerRef}
           {...provided.droppableProps}
-          className="h-full"
+          className={cn(
+            "h-full rounded-md",
+            isDraggingOver && "bg-primary/[.035]"
+          )}
           scrollHideDelay={0}
         >
           {cards.map((card, i) => (

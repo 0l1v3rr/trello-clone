@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useBoardContext } from "@/context/board-context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, X } from "lucide-react";
+import { resetServerContext } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { listSchema } from "@/lib/schemas/list";
@@ -32,6 +33,7 @@ const NewList = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof listSchema>) => {
+    resetServerContext();
     await createList(
       {
         boardId: board.id,

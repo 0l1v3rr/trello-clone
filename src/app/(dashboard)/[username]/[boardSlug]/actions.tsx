@@ -87,11 +87,13 @@ export async function updateCardPositions(
   cards: Pick<Card, "id" | "position">[]
 ) {
   await Promise.all(
-    cards.map((card) =>
-      prisma.card.update({
-        where: { id: card.id },
-        data: { position: card.position },
-      })
-    )
+    cards.map((card) => updateCard(card.id, { position: card.position }))
   );
+}
+
+export async function updateCard(
+  cardId: string,
+  card: Omit<Partial<Card>, "id">
+) {
+  return await prisma.card.update({ where: { id: cardId }, data: { ...card } });
 }
