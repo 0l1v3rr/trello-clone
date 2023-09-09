@@ -1,8 +1,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { BoardDetail, ListDetail } from "@/types/board";
 import { prisma } from "@/lib/prisma";
-import { BoardDetail } from "@/app/(dashboard)/[username]/[boardSlug]/page";
 
 export async function findBoardByUsernameAndSlug(
   username: string,
@@ -19,6 +19,18 @@ export async function findBoardByUsernameAndSlug(
       lists: {
         orderBy: { position: "asc" },
       },
+    },
+  });
+}
+
+export async function getListsByBoardId(
+  boardId: string
+): Promise<ListDetail[]> {
+  return await prisma.list.findMany({
+    where: { boardId: boardId },
+    orderBy: { position: "asc" },
+    include: {
+      cards: { include: { labels: true }, orderBy: { position: "asc" } },
     },
   });
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { FC, useState } from "react";
+import { useBoardContext } from "@/context/board-context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { List } from "@prisma/client";
 import { Plus, X } from "lucide-react";
@@ -22,10 +23,10 @@ import { createCard } from "@/app/(dashboard)/[username]/[boardSlug]/actions";
 
 interface NewCardProps {
   list: List;
-  path: string;
 }
 
-const NewCard: FC<NewCardProps> = ({ list, path }) => {
+const NewCard: FC<NewCardProps> = ({ list }) => {
+  const { path } = useBoardContext();
   const [mode, setMode] = useState<"form" | "button">("button");
 
   const form = useForm<z.infer<typeof cardSchema>>({

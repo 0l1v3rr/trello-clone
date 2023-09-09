@@ -1,5 +1,5 @@
 import { FC, Suspense } from "react";
-import { List } from "@prisma/client";
+import { ListDetail } from "@/types/board";
 import {
   Card,
   CardContent,
@@ -8,15 +8,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import CardSkeleton from "@/app/(dashboard)/[username]/[boardSlug]/_components/card/card-skeleton";
-import CardsArea from "@/app/(dashboard)/[username]/[boardSlug]/_components/list/cards-area";
-import NewCard from "./new-card";
+import CardsArea from "@/app/(dashboard)/[username]/[boardSlug]/_components/card/cards-area";
+import NewCard from "@/app/(dashboard)/[username]/[boardSlug]/_components/card/new-card";
 
 interface ListItemProps {
-  list: List;
-  path: string;
+  list: ListDetail;
 }
 
-const ListItem: FC<ListItemProps> = ({ list, path }) => {
+const ListItem: FC<ListItemProps> = ({ list }) => {
   return (
     <Card className="flex h-full min-w-[300px] max-w-[300px] flex-col">
       <CardHeader className="px-4 py-3">
@@ -24,11 +23,11 @@ const ListItem: FC<ListItemProps> = ({ list, path }) => {
       </CardHeader>
       <CardContent className="flex-1 overflow-hidden p-2">
         <Suspense fallback={<CardSkeleton />}>
-          <CardsArea listId={list.id} />
+          <CardsArea cards={list.cards} listId={list.id} />
         </Suspense>
       </CardContent>
       <CardFooter className="p-2">
-        <NewCard path={path} list={list} />
+        <NewCard list={list} />
       </CardFooter>
     </Card>
   );

@@ -1,19 +1,14 @@
 import { FC } from "react";
 import BoardContext from "@/context/board-context";
-import { Board, Label, List, User } from "@prisma/client";
 import { BoardBackground } from "@/lib/schemas/board";
 import Background from "@/app/(dashboard)/[username]/[boardSlug]/_components/background";
 import BoardHeader from "@/app/(dashboard)/[username]/[boardSlug]/_components/header/board-header";
-import ListItem from "@/app/(dashboard)/[username]/[boardSlug]/_components/list/list-item";
 import NewList from "@/app/(dashboard)/[username]/[boardSlug]/_components/list/new-list";
-import { findBoardByUsernameAndSlug } from "@/app/(dashboard)/[username]/[boardSlug]/actions";
-
-export interface BoardDetail extends Board {
-  owner: User;
-  members: User[];
-  labels: Label[];
-  lists: List[];
-}
+import {
+  findBoardByUsernameAndSlug,
+  getListsByBoardId,
+} from "@/app/(dashboard)/[username]/[boardSlug]/actions";
+import ListList from "./_components/list/list-list";
 
 interface BoardPageProps {
   params: {
@@ -27,8 +22,8 @@ const BoardPage: FC<BoardPageProps> = async ({ params }) => {
     params.username,
     params.boardSlug
   );
+  const lists = await getListsByBoardId(board.id);
   const background = board.background as unknown as BoardBackground;
-  const path = `/${params.username}/${params.boardSlug}`;
 
   return (
     <main className="relative h-[calc(100vh_-_4.56rem)] w-full overflow-x-auto overflow-y-hidden">
@@ -37,11 +32,9 @@ const BoardPage: FC<BoardPageProps> = async ({ params }) => {
         <BoardHeader board={board} />
 
         <div className="flex h-full flex-1 items-start gap-6 overflow-x-auto p-6">
-          <BoardContext>
-            {board.lists.map((list) => (
-              <ListItem key={list.id} list={list} path={path} />
-            ))}
-            <NewList board={board} />
+          <BoardContext board={board} lists={lists}>
+            <ListList />
+            <NewList />
           </BoardContext>
         </div>
       </div>

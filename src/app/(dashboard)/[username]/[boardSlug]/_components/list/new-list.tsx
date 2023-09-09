@@ -1,6 +1,7 @@
 "use client";
 
-import { FC, useState } from "react";
+import { useState } from "react";
+import { useBoardContext } from "@/context/board-context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, X } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -18,13 +19,9 @@ import {
 import { Input } from "@/components/ui/input";
 import LoadingButton from "@/components/ui/loading-button";
 import { createList } from "@/app/(dashboard)/[username]/[boardSlug]/actions";
-import { BoardDetail } from "@/app/(dashboard)/[username]/[boardSlug]/page";
 
-interface NewListProps {
-  board: BoardDetail;
-}
-
-const NewList: FC<NewListProps> = ({ board }) => {
+const NewList = () => {
+  const { board, path } = useBoardContext();
   const [mode, setMode] = useState<"form" | "button">("button");
 
   const form = useForm<z.infer<typeof listSchema>>({
@@ -41,7 +38,7 @@ const NewList: FC<NewListProps> = ({ board }) => {
         position: (board.lists.at(-1)?.position ?? 0) + 1,
         title: values.name,
       },
-      `/${board.owner.username}/${board.slug}`
+      path
     );
     setMode("button");
     form.reset();
