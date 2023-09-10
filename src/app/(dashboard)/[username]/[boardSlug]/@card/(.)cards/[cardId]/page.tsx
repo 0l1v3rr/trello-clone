@@ -18,7 +18,7 @@ const CardModal: FC<CardModalProps> = ({ params }) => {
   const boardPath = `/${params.username}/${params.boardSlug}`;
 
   return (
-    <DialogWrapper path={boardPath}>
+    <DialogWrapper>
       <DialogHeader>
         <DialogTitle>{params.cardId}</DialogTitle>
         <DialogDescription>

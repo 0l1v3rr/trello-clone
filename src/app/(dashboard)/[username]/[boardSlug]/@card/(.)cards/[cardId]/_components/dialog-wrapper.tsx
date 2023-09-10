@@ -6,11 +6,9 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
-interface DialogWrapperProps extends PropsWithChildren {
-  path: string;
-}
+interface DialogWrapperProps extends PropsWithChildren {}
 
-const DialogWrapper: FC<DialogWrapperProps> = ({ path, children }) => {
+const DialogWrapper: FC<DialogWrapperProps> = ({ children }) => {
   const router = useRouter();
 
   return (
