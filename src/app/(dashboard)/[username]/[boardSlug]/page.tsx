@@ -17,6 +17,8 @@ interface BoardPageProps {
   };
 }
 
+export const revalidate = 10;
+
 const BoardPage: FC<BoardPageProps> = async ({ params }) => {
   const board = await findBoardByUsernameAndSlug(
     params.username,

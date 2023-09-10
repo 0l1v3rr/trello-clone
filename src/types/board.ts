@@ -9,3 +9,8 @@ export interface BoardDetail extends Board {
 export interface ListDetail extends List {
   cards: (Card & { labels: Label[] })[];
 }
+
+export interface CardDetail extends Card {
+  list: List;
+  labels: Label[];
+}
