@@ -36,7 +36,7 @@ const BoardContextProvider: FC<BoardContextProviderProps> = ({
   board,
   lists: initialLists,
 }) => {
-  const path = `/${board.owner.name}/${board.slug}`;
+  const path = `/${board.owner.username}/${board.slug}`;
   const [lists, handleDragEnd] = useOptimistic(
     initialLists,
     (state, { destination, source, draggableId }: DropResult) => {

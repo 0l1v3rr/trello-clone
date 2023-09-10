@@ -2,6 +2,7 @@
 
 import { FC } from "react";
 import Link from "next/link";
+import { useBoardContext } from "@/context/board-context";
 import { Draggable } from "react-beautiful-dnd";
 import { ListDetail } from "@/types/board";
 import { cn } from "@/lib/utils";
@@ -14,6 +15,8 @@ interface CardItemProps {
 }
 
 const CardItem: FC<CardItemProps> = ({ card, index }) => {
+  const { path } = useBoardContext();
+
   return (
     <Draggable draggableId={card.id} index={index}>
       {(provided) => (
@@ -27,7 +30,7 @@ const CardItem: FC<CardItemProps> = ({ card, index }) => {
           variant="secondary"
           asChild
         >
-          <Link href={`/cards/${card.id}`}>
+          <Link href={`${path}/cards/${card.id}`}>
             {card.labels.length > 0 && (
               <div className="flex flex-wrap items-center gap-2">
                 {card.labels.map((label) => (
