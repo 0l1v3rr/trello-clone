@@ -1,9 +1,8 @@
 "use client";
 
-import { FC } from "react";
 import { useRouter } from "next/navigation";
+import { useCardContext } from "@/context/card-context";
 import { X } from "lucide-react";
-import { CardDetail } from "@/types/board";
 import { Button } from "@/components/ui/button";
 import {
   DialogDescription,
@@ -11,12 +10,9 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-interface CardHeaderProps {
-  card: CardDetail;
-}
-
-const CardHeader: FC<CardHeaderProps> = ({ card }) => {
+const CardHeader = () => {
   const router = useRouter();
+  const { card } = useCardContext();
 
   return (
     <DialogHeader className="flex flex-row items-start justify-between">

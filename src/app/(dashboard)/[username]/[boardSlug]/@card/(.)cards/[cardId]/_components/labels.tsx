@@ -1,14 +1,13 @@
-import { FC } from "react";
+"use client";
+
+import { useCardContext } from "@/context/card-context";
 import { Plus } from "lucide-react";
-import { CardDetail } from "@/types/board";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-interface LabelsProps {
-  card: CardDetail;
-}
+const Labels = () => {
+  const { card } = useCardContext();
 
-const Labels: FC<LabelsProps> = ({ card }) => {
   return (
     <div className="flex flex-col gap-1">
       <h3 className="font-semibold text-muted-foreground">Labels</h3>

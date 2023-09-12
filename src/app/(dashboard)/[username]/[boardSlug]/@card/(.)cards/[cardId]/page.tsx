@@ -1,7 +1,8 @@
 import { FC } from "react";
-import { DialogContent } from "@/components/ui/dialog";
+import CardContextProvider from "@/context/card-context";
 import DialogWrapper from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)cards/[cardId]//_components/dialog-wrapper";
 import { getCardDetails } from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)cards/[cardId]/actions";
+import CardDescription from "./_components/description/card-description";
 import CardHeader from "./_components/header/card-header";
 import Labels from "./_components/labels";
 
@@ -20,12 +21,15 @@ const CardModal: FC<CardModalProps> = async ({ params }) => {
   const card = await getCardDetails(params.cardId);
 
   return (
-    <DialogWrapper>
-      <CardHeader card={card} />
-      <main className="mt-1 flex flex-col gap-3">
-        <Labels card={card} />
-      </main>
-    </DialogWrapper>
+    <CardContextProvider card={card}>
+      <DialogWrapper>
+        <CardHeader />
+        <main className="mt-1 flex flex-col gap-6">
+          <Labels />
+          <CardDescription />
+        </main>
+      </DialogWrapper>
+    </CardContextProvider>
   );
 };
 
