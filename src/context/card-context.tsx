@@ -1,16 +1,11 @@
 "use client";
 
-import {
-  createContext,
-  FC,
-  PropsWithChildren,
-  useContext,
-  experimental_useOptimistic as useOptimistic,
-} from "react";
-import { CardDetail } from "@/types/board";
+import { createContext, FC, PropsWithChildren, useContext } from "react";
+import { BoardDetail, CardDetail } from "@/types/board";
 
 interface CardContextProps {
   card: CardDetail;
+  board: BoardDetail;
 }
 
 const CardContext = createContext<CardContextProps>({} as CardContextProps);
@@ -21,14 +16,18 @@ export function useCardContext() {
 
 interface CardContextProviderProps extends PropsWithChildren {
   card: CardDetail;
+  board: BoardDetail;
 }
 
 const CardContextProvider: FC<CardContextProviderProps> = ({
   children,
+  board,
   card,
 }) => {
   return (
-    <CardContext.Provider value={{ card }}>{children}</CardContext.Provider>
+    <CardContext.Provider value={{ card, board }}>
+      {children}
+    </CardContext.Provider>
   );
 };
 
