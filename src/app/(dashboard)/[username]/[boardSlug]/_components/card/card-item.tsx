@@ -3,6 +3,7 @@
 import { FC } from "react";
 import Link from "next/link";
 import { useBoardContext } from "@/context/board-context";
+import { AlignLeft } from "lucide-react";
 import { Draggable } from "react-beautiful-dnd";
 import { ListDetail } from "@/types/board";
 import { cn } from "@/lib/utils";
@@ -36,6 +37,7 @@ const CardItem: FC<CardItemProps> = ({ card, index }) => {
                 {card.labels.map((label) => (
                   <Badge
                     key={label.id}
+                    className="rounded-md"
                     style={{ backgroundColor: label.color }}
                   >
                     {label.title}
@@ -45,6 +47,12 @@ const CardItem: FC<CardItemProps> = ({ card, index }) => {
             )}
 
             <span>{card.title}</span>
+
+            {card.description && (
+              <div className="flex items-center gap-2 text-muted-foreground [&>*:is(svg)]:w-4">
+                {card.description && <AlignLeft />}
+              </div>
+            )}
           </Link>
         </Button>
       )}
