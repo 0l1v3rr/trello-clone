@@ -18,7 +18,6 @@ interface CardModalProps {
 export const revalidate = 10;
 
 const CardModal: FC<CardModalProps> = async ({ params }) => {
-  // const boardPath = `/${params.username}/${params.boardSlug}`;
   const card = await getCardDetails(params.cardId);
   const board = await findBoardByUsernameAndSlug(
     params.username,

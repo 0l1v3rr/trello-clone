@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 interface LabelListProps {}
 
 const LabelList: FC<LabelListProps> = ({}) => {
-  const { board, card } = useCardContext();
+  const { board, card, toggleLabel } = useCardContext();
   const cardLabelIds = card.labels.map((l) => l.id);
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -44,6 +44,7 @@ const LabelList: FC<LabelListProps> = ({}) => {
               id={`cb-${label.id}`}
               checked={cardLabelIds.includes(label.id)}
               className="mr-2 h-6 w-6"
+              onCheckedChange={(e) => toggleLabel(label, !e)}
             />
             <label
               htmlFor={`cb-${label.id}`}
