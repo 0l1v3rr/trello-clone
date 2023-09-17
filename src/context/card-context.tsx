@@ -37,7 +37,7 @@ const CardContextProvider: FC<CardContextProviderProps> = ({
   card: initialCard,
 }) => {
   const [card, setCard] = useState(initialCard);
-  const path = `/${board.owner.username}/${board.slug}`;
+  // const path = `/${board.owner.username}/${board.slug}`;
 
   const toggleLabel = (label: Label, remove: boolean) => {
     setCard((prev) => {
@@ -45,10 +45,10 @@ const CardContextProvider: FC<CardContextProviderProps> = ({
 
       if (remove) {
         newCard.labels = prev.labels.filter((x) => x.id !== label.id);
-        removeCardLabel(prev.id, label.id, path);
+        removeCardLabel(prev.id, label.id);
       } else {
         newCard.labels.push(label);
-        addCardLabel(prev.id, label.id, path);
+        addCardLabel(prev.id, label.id);
       }
 
       return newCard;
