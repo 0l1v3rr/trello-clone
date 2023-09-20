@@ -1,5 +1,6 @@
 import { FC, useMemo, useState } from "react";
 import { useCardContext } from "@/context/card-context";
+import { Label } from "@prisma/client";
 import { PencilIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -10,9 +11,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 
-interface LabelListProps {}
+interface LabelListProps {
+  onCreateBtnClick: () => void;
+  onEditBtnClick: (label: Label) => void;
+}
 
-const LabelList: FC<LabelListProps> = ({}) => {
+const LabelList: FC<LabelListProps> = ({
+  onCreateBtnClick,
+  onEditBtnClick,
+}) => {
   const { board, card, toggleLabel } = useCardContext();
   const cardLabelIds = card.labels.map((l) => l.id);
 
@@ -27,7 +34,7 @@ const LabelList: FC<LabelListProps> = ({}) => {
 
   return (
     <DropdownMenuContent align="end">
-      <DropdownMenuLabel>Labels</DropdownMenuLabel>
+      <DropdownMenuLabel className="text-base">Labels</DropdownMenuLabel>
       <DropdownMenuSeparator />
 
       <div className="flex w-72 flex-col gap-2 p-2">
@@ -53,13 +60,21 @@ const LabelList: FC<LabelListProps> = ({}) => {
             >
               {label.title}
             </label>
-            <Button size="icon" variant="ghost">
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={() => onEditBtnClick(label)}
+            >
               <PencilIcon className="w-4" />
             </Button>
           </div>
         ))}
 
-        <Button variant="secondary" className="mt-2 w-full">
+        <Button
+          variant="secondary"
+          className="mt-2 w-full"
+          onClick={onCreateBtnClick}
+        >
           Create a new label
         </Button>
       </div>

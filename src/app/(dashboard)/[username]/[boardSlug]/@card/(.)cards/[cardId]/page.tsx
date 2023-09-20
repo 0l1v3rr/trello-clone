@@ -1,5 +1,6 @@
 import { FC } from "react";
 import CardContextProvider from "@/context/card-context";
+import Activity from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)cards/[cardId]/_components/activity/activity";
 import CardDescription from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)cards/[cardId]/_components/description/card-description";
 import DialogWrapper from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)cards/[cardId]/_components/dialog-wrapper";
 import CardHeader from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)cards/[cardId]/_components/header/card-header";
@@ -29,6 +30,7 @@ const CardModal: FC<CardModalProps> = async ({ params }) => {
         <main className="mt-1 flex flex-col gap-6">
           <Labels />
           <CardDescription />
+          <Activity />
         </main>
       </DialogWrapper>
     </CardContextProvider>
