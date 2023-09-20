@@ -24,6 +24,20 @@ export async function findBoardByUsernameAndSlug(
   });
 }
 
+export async function findBoardById(id: string): Promise<BoardDetail> {
+  return await prisma.board.findUniqueOrThrow({
+    where: { id },
+    include: {
+      members: true,
+      owner: true,
+      labels: true,
+      lists: {
+        orderBy: { position: "asc" },
+      },
+    },
+  });
+}
+
 export async function getListsByBoardId(
   boardId: string
 ): Promise<ListDetail[]> {

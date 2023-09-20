@@ -17,6 +17,7 @@ import {
 interface CardContextProps {
   card: CardDetail;
   board: BoardDetail;
+  path: string;
   toggleLabel: (label: Label, remove: boolean) => void;
 }
 
@@ -37,7 +38,7 @@ const CardContextProvider: FC<CardContextProviderProps> = ({
   card: initialCard,
 }) => {
   const [card, setCard] = useState(initialCard);
-  // const path = `/${board.owner.username}/${board.slug}`;
+  const path = `/${board.owner.username}/${board.slug}/cards/${card.id}`;
 
   const toggleLabel = (label: Label, remove: boolean) => {
     setCard((prev) => {
@@ -56,7 +57,7 @@ const CardContextProvider: FC<CardContextProviderProps> = ({
   };
 
   return (
-    <CardContext.Provider value={{ card, board, toggleLabel }}>
+    <CardContext.Provider value={{ card, board, path, toggleLabel }}>
       {children}
     </CardContext.Provider>
   );
