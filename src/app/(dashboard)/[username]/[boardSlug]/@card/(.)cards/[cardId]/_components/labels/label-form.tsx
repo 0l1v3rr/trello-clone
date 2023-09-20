@@ -1,6 +1,10 @@
-import { FC, useState } from "react";
+import { FC } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@prisma/client";
 import { ChevronLeft } from "lucide-react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { labelSchema } from "@/lib/schemas/label";
 import { generateRandomHex } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,7 +12,16 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import LoadingButton from "@/components/ui/loading-button";
 import { Separator } from "@/components/ui/separator";
 
 interface LabelFormProps {
@@ -17,8 +30,20 @@ interface LabelFormProps {
 }
 
 const LabelForm: FC<LabelFormProps> = ({ onBack, label }) => {
-  const [title, setTitle] = useState(label?.title ?? "");
-  const [color, setColor] = useState(label?.color ?? generateRandomHex());
+  const form = useForm<z.infer<typeof labelSchema>>({
+    resolver: zodResolver(labelSchema),
+    defaultValues: {
+      title: label?.title ?? "",
+      color: label?.color ?? generateRandomHex(),
+    },
+  });
+
+  const title = form.watch("title");
+  const color = form.watch("color");
+
+  const onSubmit = async (values: z.infer<typeof labelSchema>) => {
+    // onBack();
+  };
 
   return (
     <DropdownMenuContent align="end">
@@ -33,7 +58,7 @@ const LabelForm: FC<LabelFormProps> = ({ onBack, label }) => {
 
       <div className="w-full px-8 py-3">
         <div
-          className="flex-1 cursor-pointer rounded-md px-4 py-2 font-semibold text-background"
+          className="h-[40px] flex-1 cursor-pointer rounded-md px-4 py-2 font-semibold text-background"
           style={{ backgroundColor: color }}
         >
           {title}
@@ -41,44 +66,64 @@ const LabelForm: FC<LabelFormProps> = ({ onBack, label }) => {
       </div>
       <DropdownMenuSeparator />
 
-      <div className="flex w-72 flex-col gap-2 p-2">
-        <Input
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex w-72 flex-col gap-2 p-2"
+        >
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Title</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <Input
-          placeholder="Color"
-          type="color"
-          value={color}
-          onChange={(e) => setColor(e.target.value)}
-        />
+          <FormField
+            control={form.control}
+            name="color"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Color</FormLabel>
+                <FormControl>
+                  <Input type="color" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <Separator />
+          <Separator />
 
-        <div className="flex items-center justify-between gap-2">
-          <Button
-            variant="default"
-            onClick={() => {
-              onBack();
-            }}
-          >
-            {label ? "Save" : "Create"}
-          </Button>
-
-          {label && (
-            <Button
-              variant="destructive"
-              onClick={() => {
-                onBack();
-              }}
+          <div className="flex items-center justify-between gap-2">
+            <LoadingButton
+              type="submit"
+              variant="default"
+              loading={form.formState.isSubmitting}
             >
-              Delete
-            </Button>
-          )}
-        </div>
-      </div>
+              {label ? "Save" : "Create"}
+            </LoadingButton>
+
+            {label && (
+              <Button
+                type="button"
+                variant="destructive"
+                onClick={() => {
+                  onBack();
+                }}
+              >
+                Delete
+              </Button>
+            )}
+          </div>
+        </form>
+      </Form>
     </DropdownMenuContent>
   );
 };
