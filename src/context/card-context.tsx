@@ -11,14 +11,18 @@ import { Label } from "@prisma/client";
 import { BoardDetail, CardDetail } from "@/types/board";
 import {
   addCardLabel,
+  getCardDetails,
   removeCardLabel,
 } from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)cards/[cardId]/actions";
+import { findBoardById } from "@/app/(dashboard)/[username]/[boardSlug]/actions";
 
 interface CardContextProps {
   card: CardDetail;
   board: BoardDetail;
   path: string;
   toggleLabel: (label: Label, remove: boolean) => void;
+  revalidateCard: () => Promise<void>;
+  revalidateBoard: () => Promise<void>;
 }
 
 const CardContext = createContext<CardContextProps>({} as CardContextProps);
@@ -34,10 +38,11 @@ interface CardContextProviderProps extends PropsWithChildren {
 
 const CardContextProvider: FC<CardContextProviderProps> = ({
   children,
-  board,
+  board: initialBoard,
   card: initialCard,
 }) => {
   const [card, setCard] = useState(initialCard);
+  const [board, setBoard] = useState(initialBoard);
   const path = `/${board.owner.username}/${board.slug}/cards/${card.id}`;
 
   const toggleLabel = (label: Label, remove: boolean) => {
@@ -56,8 +61,27 @@ const CardContextProvider: FC<CardContextProviderProps> = ({
     });
   };
 
+  const revalidateCard = async () => {
+    const revalidatedBoard = await getCardDetails(card.id);
+    setCard(revalidatedBoard);
+  };
+
+  const revalidateBoard = async () => {
+    const revalidatedBoard = await findBoardById(board.id);
+    setBoard(revalidatedBoard);
+  };
+
   return (
-    <CardContext.Provider value={{ card, board, path, toggleLabel }}>
+    <CardContext.Provider
+      value={{
+        card,
+        board,
+        path,
+        toggleLabel,
+        revalidateCard,
+        revalidateBoard,
+      }}
+    >
       {children}
     </CardContext.Provider>
   );

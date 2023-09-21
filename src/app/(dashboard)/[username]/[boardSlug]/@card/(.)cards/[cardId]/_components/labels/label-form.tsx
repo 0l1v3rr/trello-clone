@@ -1,7 +1,6 @@
 "use client";
 
 import { FC } from "react";
-import { useRouter } from "next/navigation";
 import { useCardContext } from "@/context/card-context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@prisma/client";
@@ -38,8 +37,7 @@ interface LabelFormProps {
 }
 
 const LabelForm: FC<LabelFormProps> = ({ onBack, label }) => {
-  const { board } = useCardContext();
-  const router = useRouter();
+  const { board, revalidateBoard, revalidateCard } = useCardContext();
 
   const form = useForm<z.infer<typeof labelSchema>>({
     resolver: zodResolver(labelSchema),
@@ -57,7 +55,7 @@ const LabelForm: FC<LabelFormProps> = ({ onBack, label }) => {
       ? updateLabel(label.id, values)
       : createLabel(board.id, values));
 
-    router.refresh();
+    await Promise.all([revalidateBoard(), revalidateCard()]);
     onBack();
   };
 

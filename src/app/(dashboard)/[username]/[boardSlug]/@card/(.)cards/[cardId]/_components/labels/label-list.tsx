@@ -2,6 +2,7 @@ import { FC, useMemo, useState } from "react";
 import { useCardContext } from "@/context/card-context";
 import { Label } from "@prisma/client";
 import { PencilIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -42,7 +43,6 @@ const LabelList: FC<LabelListProps> = ({
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search labels..."
-          className="mb-2"
         />
 
         {boardLabels.map((label) => (
@@ -72,7 +72,7 @@ const LabelList: FC<LabelListProps> = ({
 
         <Button
           variant="secondary"
-          className="mt-2 w-full"
+          className={cn("w-full", boardLabels.length > 0 && "mt-2")}
           onClick={onCreateBtnClick}
         >
           Create a new label
