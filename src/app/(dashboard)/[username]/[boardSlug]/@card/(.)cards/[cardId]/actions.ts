@@ -42,3 +42,7 @@ export async function updateLabel(
     data: { ...label },
   });
 }
+
+export async function removeLabel(id: string) {
+  await prisma.label.delete({ where: { id } });
+}

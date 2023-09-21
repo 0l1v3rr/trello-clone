@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useTransition } from "react";
 import { useCardContext } from "@/context/card-context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@prisma/client";
@@ -28,6 +28,7 @@ import LoadingButton from "@/components/ui/loading-button";
 import { Separator } from "@/components/ui/separator";
 import {
   createLabel,
+  removeLabel,
   updateLabel,
 } from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)cards/[cardId]/actions";
 
@@ -38,6 +39,7 @@ interface LabelFormProps {
 
 const LabelForm: FC<LabelFormProps> = ({ onBack, label }) => {
   const { board, revalidateBoard, revalidateCard } = useCardContext();
+  const [isRemoving, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof labelSchema>>({
     resolver: zodResolver(labelSchema),
@@ -125,15 +127,20 @@ const LabelForm: FC<LabelFormProps> = ({ onBack, label }) => {
             </LoadingButton>
 
             {label && (
-              <Button
+              <LoadingButton
+                loading={isRemoving}
                 type="button"
                 variant="destructive"
                 onClick={() => {
-                  onBack();
+                  startTransition(async () => {
+                    await removeLabel(label.id);
+                    await Promise.all([revalidateBoard(), revalidateCard()]);
+                    onBack();
+                  });
                 }}
               >
                 Delete
-              </Button>
+              </LoadingButton>
             )}
           </div>
         </form>
