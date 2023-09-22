@@ -23,7 +23,14 @@ const CardHeader = () => {
         </DialogDescription>
       </div>
 
-      <Button size="icon" variant="ghost" onClick={() => router.back()}>
+      <Button
+        size="icon"
+        variant="ghost"
+        onClick={() => {
+          router.back();
+          router.refresh();
+        }}
+      >
         <X />
         <span className="sr-only">Close</span>
       </Button>
