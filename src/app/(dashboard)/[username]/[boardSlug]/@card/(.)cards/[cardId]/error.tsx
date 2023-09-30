@@ -1,7 +1,9 @@
+"use client";
+
 import NotFound from "@/components/not-found";
 
-const NotFoundPage = () => {
+const ErrorPage = () => {
   return <NotFound />;
 };
 
-export default NotFoundPage;
+export default ErrorPage;
