@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { useCardContext } from "@/context/card-context";
 import parse from "html-react-parser";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import DescriptionWysiwyg from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)cards/[cardId]/_components/description/description-wysiwyg";
 
 const CardDescription = () => {
-  const { card } = useCardContext();
+  const { card, permission } = useCardContext();
   const [descriptionEdit, setDescriptionEdit] = useState(false);
 
   return (
@@ -19,11 +20,17 @@ const CardDescription = () => {
         <DescriptionWysiwyg onReturn={() => setDescriptionEdit(false)} />
       ) : (
         <Button
+          disabled={permission === "VISITOR"}
           variant={card.description ? "ghost" : "secondary"}
           className="h-fit justify-start"
           onClick={() => setDescriptionEdit(true)}
         >
-          <div className="flex flex-col items-start text-base">
+          <div
+            className={cn(
+              "flex flex-col items-start",
+              card.description && "text-base"
+            )}
+          >
             {card.description
               ? parse(card.description)
               : "Add a more detailed description..."}

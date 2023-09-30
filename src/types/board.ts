@@ -14,3 +14,5 @@ export interface CardDetail extends Card {
   list: List;
   labels: Label[];
 }
+
+export type BoardMemberType = "VISITOR" | "MEMBER" | "OWNER";

@@ -16,10 +16,14 @@ interface CardItemProps {
 }
 
 const CardItem: FC<CardItemProps> = ({ card, index }) => {
-  const { path } = useBoardContext();
+  const { path, permission } = useBoardContext();
 
   return (
-    <Draggable draggableId={card.id} index={index}>
+    <Draggable
+      draggableId={card.id}
+      index={index}
+      isDragDisabled={permission === "VISITOR"}
+    >
       {(provided) => (
         <Button
           {...provided.draggableProps}

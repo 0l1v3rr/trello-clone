@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 import { Label } from "@prisma/client";
-import { BoardDetail, CardDetail } from "@/types/board";
+import { BoardDetail, BoardMemberType, CardDetail } from "@/types/board";
 import {
   addCardLabel,
   getCardDetails,
@@ -19,6 +19,7 @@ import { findBoardById } from "@/app/(dashboard)/[username]/[boardSlug]/actions"
 interface CardContextProps {
   card: CardDetail;
   board: BoardDetail;
+  permission: BoardMemberType;
   path: string;
   toggleLabel: (label: Label, remove: boolean) => void;
   revalidateCard: () => Promise<void>;
@@ -34,12 +35,14 @@ export function useCardContext() {
 interface CardContextProviderProps extends PropsWithChildren {
   card: CardDetail;
   board: BoardDetail;
+  permission: BoardMemberType;
 }
 
 const CardContextProvider: FC<CardContextProviderProps> = ({
   children,
   board: initialBoard,
   card: initialCard,
+  permission,
 }) => {
   const [card, setCard] = useState(initialCard);
   const [board, setBoard] = useState(initialBoard);
@@ -77,6 +80,7 @@ const CardContextProvider: FC<CardContextProviderProps> = ({
         card,
         board,
         path,
+        permission,
         toggleLabel,
         revalidateCard,
         revalidateBoard,

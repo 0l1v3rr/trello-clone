@@ -6,6 +6,7 @@ import BoardHeader from "@/app/(dashboard)/[username]/[boardSlug]/_components/he
 import NewList from "@/app/(dashboard)/[username]/[boardSlug]/_components/list/new-list";
 import {
   findBoardByUsernameAndSlug,
+  getBoardUserPermission,
   getListsByBoardId,
 } from "@/app/(dashboard)/[username]/[boardSlug]/actions";
 import ListList from "./_components/list/list-list";
@@ -23,22 +24,24 @@ const BoardPage: FC<BoardPageProps> = async ({ params }) => {
     params.boardSlug
   );
   const lists = await getListsByBoardId(board.id);
+
+  const permission = await getBoardUserPermission(board);
   const background = board.background as unknown as BoardBackground;
 
   return (
-    <main className="relative h-[calc(100vh_-_4.56rem)] w-full overflow-x-auto overflow-y-hidden">
-      <Background background={background} />
-      <div className="absolute left-0 top-0 isolate z-10 flex h-full w-full flex-col text-white">
-        <BoardHeader board={board} />
+    <BoardContext board={board} lists={lists} permission={permission}>
+      <main className="relative h-[calc(100vh_-_4.56rem)] w-full overflow-x-auto overflow-y-hidden">
+        <Background background={background} />
+        <div className="absolute left-0 top-0 isolate z-10 flex h-full w-full flex-col text-white">
+          <BoardHeader />
 
-        <div className="flex h-full flex-1 items-start gap-6 overflow-x-auto p-6">
-          <BoardContext board={board} lists={lists}>
+          <div className="flex h-full flex-1 items-start gap-6 overflow-x-auto p-6">
             <ListList />
-            <NewList />
-          </BoardContext>
+            {permission !== "VISITOR" && <NewList />}
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </BoardContext>
   );
 };
 

@@ -6,7 +6,10 @@ import DialogWrapper from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)car
 import CardHeader from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)cards/[cardId]/_components/header/card-header";
 import Labels from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)cards/[cardId]/_components/labels/labels";
 import { getCardDetails } from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)cards/[cardId]/actions";
-import { findBoardById } from "@/app/(dashboard)/[username]/[boardSlug]/actions";
+import {
+  findBoardById,
+  getBoardUserPermission,
+} from "@/app/(dashboard)/[username]/[boardSlug]/actions";
 
 interface CardModalProps {
   params: {
@@ -19,9 +22,10 @@ interface CardModalProps {
 const CardModal: FC<CardModalProps> = async ({ params }) => {
   const card = await getCardDetails(params.cardId);
   const board = await findBoardById(card.list.boardId);
+  const permission = await getBoardUserPermission(board);
 
   return (
-    <CardContextProvider card={card} board={board}>
+    <CardContextProvider card={card} board={board} permission={permission}>
       <DialogWrapper>
         <CardHeader />
         <main className="mt-1 flex flex-col gap-6">

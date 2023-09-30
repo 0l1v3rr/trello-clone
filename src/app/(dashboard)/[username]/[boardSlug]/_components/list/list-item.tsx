@@ -1,4 +1,7 @@
+"use client";
+
 import { FC, Suspense } from "react";
+import { useBoardContext } from "@/context/board-context";
 import { ListDetail } from "@/types/board";
 import {
   Card,
@@ -16,6 +19,8 @@ interface ListItemProps {
 }
 
 const ListItem: FC<ListItemProps> = ({ list }) => {
+  const { permission } = useBoardContext();
+
   return (
     <Card className="flex h-full min-w-[300px] max-w-[300px] flex-col">
       <CardHeader className="px-4 py-3">
@@ -26,9 +31,11 @@ const ListItem: FC<ListItemProps> = ({ list }) => {
           <CardsArea cards={list.cards} listId={list.id} />
         </Suspense>
       </CardContent>
-      <CardFooter className="p-2">
-        <NewCard list={list} />
-      </CardFooter>
+      {permission !== "VISITOR" && (
+        <CardFooter className="p-2">
+          <NewCard list={list} />
+        </CardFooter>
+      )}
     </Card>
   );
 };

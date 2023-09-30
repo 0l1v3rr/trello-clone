@@ -2,8 +2,10 @@
 
 import { revalidatePath } from "next/cache";
 import { Card } from "@prisma/client";
-import { BoardDetail, ListDetail } from "@/types/board";
+import { getServerSession } from "next-auth";
+import { BoardDetail, BoardMemberType, ListDetail } from "@/types/board";
 import { prisma } from "@/lib/prisma";
+import { options } from "@/app/api/auth/[...nextauth]/options";
 
 export async function findBoardByUsernameAndSlug(
   username: string,
@@ -110,4 +112,24 @@ export async function updateCard(
   card: Omit<Partial<Card>, "id">
 ) {
   return await prisma.card.update({ where: { id: cardId }, data: { ...card } });
+}
+
+export async function getBoardUserPermission(
+  board: BoardDetail
+): Promise<BoardMemberType> {
+  const session = await getServerSession(options);
+
+  if (board.ownerId === session?.user.id) {
+    return "OWNER";
+  }
+
+  if (board.members.map((x) => x.id).includes(session?.user.id ?? "")) {
+    return "MEMBER";
+  }
+
+  if (!board.public) {
+    throw new Error("This board is private!");
+  }
+
+  return "VISITOR";
 }

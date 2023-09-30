@@ -14,7 +14,7 @@ import LabelForm from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)cards/[
 import LabelList from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)cards/[cardId]/_components/labels/label-list";
 
 const Labels = () => {
-  const { card } = useCardContext();
+  const { card, permission } = useCardContext();
   const [activeDropdown, setActiveDropdown] = useState<"FORM" | "LIST">("LIST");
   const [activeLabel, setActiveLabel] = useState<Label>();
 
@@ -33,32 +33,34 @@ const Labels = () => {
           </Badge>
         ))}
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="secondary" size="icon">
-              <Plus />
-            </Button>
-          </DropdownMenuTrigger>
+        {permission !== "VISITOR" && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary" size="icon">
+                <Plus />
+              </Button>
+            </DropdownMenuTrigger>
 
-          {activeDropdown === "LIST" && (
-            <LabelList
-              onCreateBtnClick={() => {
-                setActiveDropdown("FORM");
-                setActiveLabel(undefined);
-              }}
-              onEditBtnClick={(label) => {
-                setActiveDropdown("FORM");
-                setActiveLabel(label);
-              }}
-            />
-          )}
-          {activeDropdown === "FORM" && (
-            <LabelForm
-              label={activeLabel}
-              onBack={() => setActiveDropdown("LIST")}
-            />
-          )}
-        </DropdownMenu>
+            {activeDropdown === "LIST" && (
+              <LabelList
+                onCreateBtnClick={() => {
+                  setActiveDropdown("FORM");
+                  setActiveLabel(undefined);
+                }}
+                onEditBtnClick={(label) => {
+                  setActiveDropdown("FORM");
+                  setActiveLabel(label);
+                }}
+              />
+            )}
+            {activeDropdown === "FORM" && (
+              <LabelForm
+                label={activeLabel}
+                onBack={() => setActiveDropdown("LIST")}
+              />
+            )}
+          </DropdownMenu>
+        )}
       </div>
     </div>
   );

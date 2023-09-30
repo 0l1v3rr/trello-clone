@@ -8,7 +8,7 @@ import {
   experimental_useOptimistic as useOptimistic,
 } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { BoardDetail, ListDetail } from "@/types/board";
+import { BoardDetail, BoardMemberType, ListDetail } from "@/types/board";
 import {
   updateCard,
   updateCardPositions,
@@ -17,6 +17,7 @@ import {
 interface BoardContextProps {
   board: BoardDetail;
   lists: ListDetail[];
+  permission: BoardMemberType;
   path: string;
 }
 
@@ -29,12 +30,14 @@ export function useBoardContext() {
 interface BoardContextProviderProps extends PropsWithChildren {
   board: BoardDetail;
   lists: ListDetail[];
+  permission: BoardMemberType;
 }
 
 const BoardContextProvider: FC<BoardContextProviderProps> = ({
   children,
   board,
   lists: initialLists,
+  permission,
 }) => {
   const path = `/${board.owner.username}/${board.slug}`;
   const [lists, handleDragEnd] = useOptimistic(
@@ -79,7 +82,7 @@ const BoardContextProvider: FC<BoardContextProviderProps> = ({
   );
 
   return (
-    <BoardContext.Provider value={{ board, lists, path }}>
+    <BoardContext.Provider value={{ board, lists, path, permission }}>
       <DragDropContext onDragEnd={handleDragEnd}>{children}</DragDropContext>
     </BoardContext.Provider>
   );
