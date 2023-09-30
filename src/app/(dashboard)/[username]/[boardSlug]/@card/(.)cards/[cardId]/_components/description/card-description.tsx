@@ -1,24 +1,35 @@
 "use client";
 
+import { useState } from "react";
 import { useCardContext } from "@/context/card-context";
 import parse from "html-react-parser";
 import { Button } from "@/components/ui/button";
+import DescriptionWysiwyg from "@/app/(dashboard)/[username]/[boardSlug]/@card/(.)cards/[cardId]/_components/description/description-wysiwyg";
 
 const CardDescription = () => {
   const { card } = useCardContext();
+  const [descriptionEdit, setDescriptionEdit] = useState(false);
+
   return (
     <div className="flex flex-col gap-2">
-      <h3 className="font-semibold text-muted-foreground">Description</h3>
-      <Button
-        variant={card.description ? "ghost" : "secondary"}
-        className="justify-start"
-      >
-        <div>
-          {card.description
-            ? parse(card.description)
-            : "Add a more detailed description..."}
-        </div>
-      </Button>
+      <h3 className="text-lg font-semibold text-muted-foreground">
+        Description
+      </h3>
+      {descriptionEdit ? (
+        <DescriptionWysiwyg onReturn={() => setDescriptionEdit(false)} />
+      ) : (
+        <Button
+          variant={card.description ? "ghost" : "secondary"}
+          className="h-fit justify-start"
+          onClick={() => setDescriptionEdit(true)}
+        >
+          <div className="flex flex-col items-start text-base">
+            {card.description
+              ? parse(card.description)
+              : "Add a more detailed description..."}
+          </div>
+        </Button>
+      )}
     </div>
   );
 };

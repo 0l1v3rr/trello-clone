@@ -20,7 +20,7 @@ const Labels = () => {
 
   return (
     <div className="flex flex-col gap-1">
-      <h3 className="font-semibold text-muted-foreground">Labels</h3>
+      <h3 className="text-lg font-semibold text-muted-foreground">Labels</h3>
 
       <div className="flex gap-2">
         {card.labels.map((label) => (
