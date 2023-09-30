@@ -50,7 +50,11 @@ const BoardContextProvider: FC<BoardContextProviderProps> = ({
       }
 
       const sourceList = state.find((x) => x.id === source.droppableId);
-      const destList = state.find((x) => x.id === destination.droppableId);
+      const destList =
+        source.droppableId === destination.droppableId
+          ? sourceList
+          : state.find((x) => x.id === destination.droppableId);
+
       if (!sourceList || !destList) return state;
 
       const item = sourceList.cards.find((x) => x.id == draggableId);
