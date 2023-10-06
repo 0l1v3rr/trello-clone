@@ -5,7 +5,7 @@ An open source Trello Clone built with everything new in the [Next.js 13](https:
 <img src="./docs/images/screenshot-1.png" alt="Screenshot">
 
 > **Warning**  
-> This project is still under development. As such, it lacks certain features and may contain annoying bugs.
+> This project is still under development, so it's not production ready. As such, it lacks certain features and may contain annoying bugs.
 >
 > Also, it uses experimental technologies, such as Next.js server actions.
 

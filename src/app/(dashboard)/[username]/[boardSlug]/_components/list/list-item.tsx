@@ -8,11 +8,13 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
+import EditableTitle from "@/components/editable-title";
 import CardSkeleton from "@/app/(dashboard)/[username]/[boardSlug]/_components/card/card-skeleton";
 import CardsArea from "@/app/(dashboard)/[username]/[boardSlug]/_components/card/cards-area";
 import NewCard from "@/app/(dashboard)/[username]/[boardSlug]/_components/card/new-card";
-import ListTitle from "./list-title";
+import { updateList } from "@/app/(dashboard)/[username]/[boardSlug]/actions";
 
 interface ListItemProps {
   list: ListDetail;
@@ -24,7 +26,13 @@ const ListItem: FC<ListItemProps> = ({ list }) => {
   return (
     <Card className="flex h-full min-w-[300px] max-w-[300px] flex-col">
       <CardHeader className="p-2">
-        <ListTitle listId={list.id} title={list.title} />
+        <CardTitle>
+          <EditableTitle
+            title={list.title}
+            onSave={(title) => updateList(list.id, { title })}
+            className="text-lg font-semibold"
+          />
+        </CardTitle>
       </CardHeader>
       <CardContent className="flex-1 overflow-hidden p-2">
         <Suspense fallback={<CardSkeleton />}>
