@@ -67,7 +67,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
-    "@types/react-beautiful-dnd": "^13.1.4",
+    "@types/react-beautiful-dnd": "^13.1.5",
     "husky": "^8.0.0",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.2",
