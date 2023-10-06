@@ -72,6 +72,6 @@
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.2",
     "prettier-plugin-tailwindcss": "^0.5.3",
-    "prisma": "^5.2.0"
+    "prisma": "^5.4.1"
   }
 }
