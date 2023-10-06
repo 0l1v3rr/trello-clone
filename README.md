@@ -35,6 +35,7 @@ An open source Trello Clone built with everything new in the [Next.js 13](https:
 - Authentication
   - Log In, Registration
 - Dashboard
+- Light and Dark UI theme
 - Boards
   - Private, public
   - Background Images from unsplash
