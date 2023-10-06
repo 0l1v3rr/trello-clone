@@ -18,7 +18,7 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.3.0",
+    "@hookform/resolvers": "^3.3.1",
     "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
     "@prisma/client": "^5.2.0",
     "@radix-ui/react-avatar": "^1.0.4",
