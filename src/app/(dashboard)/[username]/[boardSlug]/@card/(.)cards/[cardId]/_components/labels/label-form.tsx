@@ -8,7 +8,7 @@ import { ChevronLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { labelSchema } from "@/lib/schemas/label";
-import { generateRandomHex, getTextColor } from "@/lib/utils";
+import { getTextColor } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenuContent,
@@ -26,6 +26,7 @@ import {
 import { Input } from "@/components/ui/input";
 import LoadingButton from "@/components/ui/loading-button";
 import { Separator } from "@/components/ui/separator";
+import ColorSelector from "@/components/color-selector";
 import {
   createLabel,
   removeLabel,
@@ -45,7 +46,7 @@ const LabelForm: FC<LabelFormProps> = ({ onBack, label }) => {
     resolver: zodResolver(labelSchema),
     defaultValues: {
       title: label?.title ?? "",
-      color: label?.color ?? generateRandomHex(),
+      color: label?.color ?? "#778ca3",
     },
   });
 
@@ -74,7 +75,7 @@ const LabelForm: FC<LabelFormProps> = ({ onBack, label }) => {
 
       <div className="w-full px-8 py-3">
         <div
-          className="h-[40px] flex-1 cursor-pointer rounded-md px-4 py-2 font-semibold text-background"
+          className="h-[40px] flex-1 cursor-pointer rounded-md px-4 py-2 font-semibold text-background transition-all"
           style={{ backgroundColor: color, color: getTextColor(color) }}
         >
           {title}
@@ -108,7 +109,10 @@ const LabelForm: FC<LabelFormProps> = ({ onBack, label }) => {
               <FormItem>
                 <FormLabel>Color</FormLabel>
                 <FormControl>
-                  <Input type="color" {...field} />
+                  <ColorSelector
+                    value={field.value}
+                    onChange={field.onChange}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
