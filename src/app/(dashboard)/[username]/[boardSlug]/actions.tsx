@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { Card, List } from "@prisma/client";
+import { Board, Card, List } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { BoardDetail, BoardMemberType, ListDetail } from "@/types/board";
 import { prisma } from "@/lib/prisma";
@@ -119,6 +119,16 @@ export async function updateList(
   list: Omit<Partial<List>, "id">
 ) {
   return await prisma.list.update({ where: { id: listId }, data: { ...list } });
+}
+
+export async function updateBoard(
+  boardId: string,
+  board: Omit<Partial<Board>, "id" | "background">
+) {
+  return await prisma.board.update({
+    where: { id: boardId },
+    data: { ...board },
+  });
 }
 
 export async function getBoardUserPermission(
