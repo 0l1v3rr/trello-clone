@@ -8,7 +8,7 @@ import { ChevronLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { labelSchema } from "@/lib/schemas/label";
-import { generateRandomHex } from "@/lib/utils";
+import { generateRandomHex, getTextColor } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenuContent,
@@ -75,7 +75,7 @@ const LabelForm: FC<LabelFormProps> = ({ onBack, label }) => {
       <div className="w-full px-8 py-3">
         <div
           className="h-[40px] flex-1 cursor-pointer rounded-md px-4 py-2 font-semibold text-background"
-          style={{ backgroundColor: color }}
+          style={{ backgroundColor: color, color: getTextColor(color) }}
         >
           {title}
         </div>

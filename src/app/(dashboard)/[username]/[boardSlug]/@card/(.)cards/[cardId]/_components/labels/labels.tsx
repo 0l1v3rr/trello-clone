@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useCardContext } from "@/context/card-context";
 import { Label } from "@prisma/client";
 import { Plus } from "lucide-react";
+import { getTextColor } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,12 +23,15 @@ const Labels = () => {
     <div className="flex flex-col gap-1">
       <h3 className="text-lg font-semibold text-muted-foreground">Labels</h3>
 
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         {card.labels.map((label) => (
           <Badge
-            className="rounded-md text-[.9rem] font-semibold"
+            className="h-[40px] rounded-md text-[.9rem] font-semibold"
             key={label.id}
-            style={{ backgroundColor: label.color }}
+            style={{
+              backgroundColor: label.color,
+              color: getTextColor(label.color),
+            }}
           >
             {label.title}
           </Badge>

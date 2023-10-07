@@ -6,7 +6,7 @@ import { useBoardContext } from "@/context/board-context";
 import { AlignLeft } from "lucide-react";
 import { Draggable } from "react-beautiful-dnd";
 import { ListDetail } from "@/types/board";
-import { cn } from "@/lib/utils";
+import { cn, getTextColor } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -42,7 +42,10 @@ const CardItem: FC<CardItemProps> = ({ card, index }) => {
                   <Badge
                     key={label.id}
                     className="rounded-md"
-                    style={{ backgroundColor: label.color }}
+                    style={{
+                      backgroundColor: label.color,
+                      color: getTextColor(label.color),
+                    }}
                   >
                     {label.title}
                   </Badge>

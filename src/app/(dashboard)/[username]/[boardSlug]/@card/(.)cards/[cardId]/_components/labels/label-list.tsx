@@ -2,7 +2,7 @@ import { FC, useMemo, useState } from "react";
 import { useCardContext } from "@/context/card-context";
 import { Label } from "@prisma/client";
 import { PencilIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, getTextColor } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -56,7 +56,10 @@ const LabelList: FC<LabelListProps> = ({
             <label
               htmlFor={`cb-${label.id}`}
               className="flex-1 cursor-pointer rounded-md px-4 py-2 font-semibold text-background"
-              style={{ backgroundColor: label.color }}
+              style={{
+                backgroundColor: label.color,
+                color: getTextColor(label.color),
+              }}
             >
               {label.title}
             </label>
