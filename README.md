@@ -71,8 +71,7 @@ npm i
 npm run prepare
 
 # Migrate the DB (and optionally seed it)
-npx prisma migrate dev
-npm run seed
+npx prisma migrate reset
 
 # Run the application:
 npm run dev
