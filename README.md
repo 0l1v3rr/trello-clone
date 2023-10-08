@@ -77,6 +77,8 @@ npx prisma migrate reset
 npm run dev
 ```
 
+After the successful installation, you can log in with the following credentials: username: **test**, password: **test**
+
 ## License
 
 This project is licensed under the [MIT License](./LICENSE).
