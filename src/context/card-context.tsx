@@ -60,6 +60,9 @@ const CardContextProvider: FC<CardContextProviderProps> = ({
         addCardLabel(prev.id, label.id);
       }
 
+      newCard.labels.sort((a, z) =>
+        a.color > z.color ? 1 : z.color > a.color ? -1 : 0
+      );
       return newCard;
     });
   };

@@ -8,7 +8,7 @@ import { labelSchema } from "@/lib/schemas/label";
 export async function getCardDetails(cardId: string): Promise<CardDetail> {
   return await prisma.card.findUniqueOrThrow({
     where: { id: cardId },
-    include: { list: true, labels: true },
+    include: { list: true, labels: { orderBy: { color: "asc" } } },
   });
 }
 

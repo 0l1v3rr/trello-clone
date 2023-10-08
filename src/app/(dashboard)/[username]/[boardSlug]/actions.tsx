@@ -18,7 +18,7 @@ export async function findBoardByUsernameAndSlug(
     include: {
       members: true,
       owner: true,
-      labels: true,
+      labels: { orderBy: { color: "asc" } },
       lists: {
         orderBy: { position: "asc" },
       },
@@ -32,7 +32,7 @@ export async function findBoardById(id: string): Promise<BoardDetail> {
     include: {
       members: true,
       owner: true,
-      labels: true,
+      labels: { orderBy: { color: "asc" } },
       lists: {
         orderBy: { position: "asc" },
       },
@@ -47,7 +47,10 @@ export async function getListsByBoardId(
     where: { boardId: boardId },
     orderBy: { position: "asc" },
     include: {
-      cards: { include: { labels: true }, orderBy: { position: "asc" } },
+      cards: {
+        include: { labels: { orderBy: { color: "asc" } } },
+        orderBy: { position: "asc" },
+      },
     },
   });
 }
@@ -95,7 +98,7 @@ export async function getCardsByList(listId: string) {
   return await prisma.card.findMany({
     where: { listId: listId },
     orderBy: { position: "asc" },
-    include: { labels: true },
+    include: { labels: { orderBy: { color: "asc" } } },
   });
 }
 
