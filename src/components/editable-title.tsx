@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useOuterClick } from "@/hooks/use-outer-click";
@@ -32,16 +32,19 @@ const EditableTitle: FC<EditableTitleProps> = ({
     }
   });
 
+  useEffect(() => {
+    if (mode === "EDIT") {
+      inputRef.current?.focus();
+    }
+  }, [mode, inputRef]);
+
   if (mode === "DISPLAY") {
     return (
       <Button
         tabIndex={-1}
         variant="ghost"
         className={cn("w-full justify-start px-2", className)}
-        onClick={() => {
-          setMode("EDIT");
-          inputRef.current?.focus(); // TODO focus the actual input. Maybe, select the title
-        }}
+        onClick={() => setMode("EDIT")}
       >
         {title}
       </Button>
