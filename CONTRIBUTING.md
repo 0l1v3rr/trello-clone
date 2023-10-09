@@ -41,11 +41,12 @@ If you want to work on your suggestion as well, please open an issue before you 
 
 If there's an issue you want to fix or develop, or if you've submitted an issue as a feature request and want to work on the solution:
 
-1. Fork this repository
-2. Clone your fork
-3. Start working on your changes
-4. Commit and push your changes
-5. Open a Pull Request with your changes
+1. Write a comment under the issue that you would like to work on it, so I can assign you the issue
+2. Fork this repository
+3. Clone your fork
+4. Start working on your changes
+5. Commit and push your changes
+6. Open a Pull Request with your changes
 
 ### Other ways
 
@@ -59,5 +60,5 @@ If you don't have any ideas yet, but want to support the project:
 
 ## General information
 
-- You can open the pull request directly against the main branch.
-- If possible, please use a [pull request template](./.github/PULL_REQUEST_TEMPLATE.md) when you open a PR.
+- Please use a [pull request template](./.github/PULL_REQUEST_TEMPLATE.md) when you open a PR.
+- Please, when writing your commit messages, use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).

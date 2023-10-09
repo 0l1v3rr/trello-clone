@@ -70,14 +70,14 @@ docker compose up -d
 npm i
 npm run prepare
 
-# Migrate the DB (and optionally seed it)
+# Reset the DB
 npx prisma migrate reset
 
-# Run the application:
+# Run the application
 npm run dev
 ```
 
-After the successful installation, you can log in with the following credentials: username: **test**, password: **test**
+After the successful installation, the app should start [here](http://localhost:3000). You can log in with the following credentials: username: **test**, password: **test**
 
 ## License
 
