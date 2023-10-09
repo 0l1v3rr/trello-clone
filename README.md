@@ -75,6 +75,9 @@ npx prisma migrate reset
 
 # Run the application
 npm run dev
+
+# Also, you can preview the app to see how it would work in production
+npm run preview
 ```
 
 After the successful installation, the app should start [here](http://localhost:3000). You can log in with the following credentials: username: **test**, password: **test**

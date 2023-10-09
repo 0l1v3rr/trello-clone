@@ -11,8 +11,7 @@
     "preview": "next build && next start",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,md,css}\" --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,json,md,css}\" --cache",
-    "prepare": "husky install",
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+    "prepare": "husky install"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
