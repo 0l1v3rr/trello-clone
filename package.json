@@ -44,7 +44,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cypress": "^13.3.0",
-    "eslint": "8.50.0",
+    "eslint": "8.51.0",
     "eslint-config-next": "^13.5.4",
     "html-react-parser": "^4.2.2",
     "lucide-react": "^0.284.0",
