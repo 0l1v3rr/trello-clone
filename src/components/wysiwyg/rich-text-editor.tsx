@@ -17,7 +17,7 @@ const RichTextEditor: FC<RichTextEditorProps> = ({ value = "", onChange }) => {
     editorProps: {
       attributes: {
         class:
-          "text-base min-h-[150px] w-full rounded-md rounded-tr-none rounded-tl-none border border-input bg-transparent px-3 py-2 border-t-0 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-auto",
+          "text-base break-all min-h-[150px] w-full rounded-md rounded-tr-none rounded-tl-none border border-input bg-transparent px-3 py-2 border-t-0 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-auto",
       },
     },
     extensions: [
