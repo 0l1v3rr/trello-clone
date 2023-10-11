@@ -50,14 +50,16 @@ const ImagePicker: FC<ImagePickerProps> = ({ value, onChange }) => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Image
-          src={value}
-          alt="Random Image"
-          width={486}
-          height={273}
-          className="aspect-video rounded-md border object-cover"
-          priority
-        />
+        {value && (
+          <Image
+            src={value}
+            alt="Random Image"
+            width={486}
+            height={273}
+            className="aspect-video rounded-md border object-cover"
+            priority
+          />
+        )}
       </CardContent>
       <CardFooter>
         <Button
