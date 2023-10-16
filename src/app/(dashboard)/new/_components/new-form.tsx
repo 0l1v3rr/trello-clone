@@ -1,13 +1,16 @@
 "use client";
 
 import {
+  useContext,
   useEffect,
   experimental_useEffectEvent as useEffectEvent,
   useState,
 } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/auth-context";
+import { BoardListContext } from "@/context/boardList-context";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Board } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { boardSchema } from "@/lib/schemas/board";
@@ -26,12 +29,14 @@ import {
 import { Input } from "@/components/ui/input";
 import LoadingButton from "@/components/ui/loading-button";
 import { Switch } from "@/components/ui/switch";
+import { BoardWithOwner } from "@/components/navbar/dropdowns/boards-dropdown";
 import BackgroundSelect from "@/app/(dashboard)/new/_components/background/background-select";
 import { createBoard } from "@/app/(dashboard)/new/actions";
 
 const NewForm = () => {
   const { user } = useAuthContext();
   const router = useRouter();
+  const { setBoardList } = useContext(BoardListContext);
   const [error, setError] = useState<string>();
 
   const form = useForm<z.infer<typeof boardSchema>>({
@@ -54,7 +59,15 @@ const NewForm = () => {
 
   const onSubmit = async (values: z.infer<typeof boardSchema>) => {
     try {
-      const createdBoard = await createBoard(user.id, values);
+      const createdBoard: Board = await createBoard(user.id, values);
+      const createdBoardWithOwner: BoardWithOwner = {
+        ...createdBoard,
+        owner: user,
+      };
+      setBoardList((prevBoardList) => [
+        createdBoardWithOwner,
+        ...prevBoardList,
+      ]);
       router.push(`/${user.username}/${createdBoard.slug}`);
     } catch (e: any) {
       setError(e.message);
