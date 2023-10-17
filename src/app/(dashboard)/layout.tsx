@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { AuthContextProvider } from "@/context/auth-context";
-import BoardListContextProvider from "@/context/boardList-context";
+import BoardListContextProvider from "@/context/board-list-context";
 import { getServerSession } from "next-auth";
 import Navbar from "@/components/navbar/navbar";
 import {

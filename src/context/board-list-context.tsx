@@ -13,9 +13,9 @@ import { BoardWithOwner } from "@/components/navbar/dropdowns/boards-dropdown";
 interface BoardListContextProps {
   boardList: BoardWithOwner[];
   guestBoards: BoardWithOwner[];
-  setBoardList: React.Dispatch<React.SetStateAction<BoardWithOwner[]>>;
+  setBoardList: (boards: BoardWithOwner[]) => void;
   session: Session | null;
-  setGuestBoard: React.Dispatch<React.SetStateAction<BoardWithOwner[]>>;
+  setGuestBoard: (boards: BoardWithOwner[]) => void;
 }
 
 export const BoardListContext = createContext<BoardListContextProps>({
@@ -26,7 +26,7 @@ export const BoardListContext = createContext<BoardListContextProps>({
   setGuestBoard: () => {},
 });
 
-export function useBoardContext() {
+export function useBoardListContext() {
   return useContext(BoardListContext) as BoardListContextProps;
 }
 

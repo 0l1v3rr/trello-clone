@@ -1,7 +1,7 @@
 "use client";
 
-import { FC, useContext } from "react";
-import { BoardListContext } from "@/context/boardList-context";
+import { FC } from "react";
+import { useBoardListContext } from "@/context/board-list-context";
 import { cn } from "@/lib/utils";
 import Navigate from "@/components/navigate";
 import BoardList from "@/app/(dashboard)/_components/boards/board-list";
@@ -11,7 +11,7 @@ interface BoardsProps {
 }
 
 const Boards: FC<BoardsProps> = ({ className }) => {
-  const { boardList, guestBoards, session } = useContext(BoardListContext);
+  const { boardList, guestBoards, session } = useBoardListContext();
   if (!session) return <Navigate to="/login" />;
 
   return (
