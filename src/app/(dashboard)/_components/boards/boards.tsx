@@ -1,26 +1,23 @@
+"use client";
+
 import { FC } from "react";
-import { getServerSession } from "next-auth";
+import { useBoardListContext } from "@/context/board-list-context";
 import { cn } from "@/lib/utils";
 import Navigate from "@/components/navigate";
 import BoardList from "@/app/(dashboard)/_components/boards/board-list";
-import { getUserBoards, getUserGuestBoards } from "@/app/(dashboard)/actions";
-import { options } from "@/app/api/auth/[...nextauth]/options";
 
 interface BoardsProps {
   className?: string;
 }
 
-const Boards: FC<BoardsProps> = async ({ className }) => {
-  const session = await getServerSession(options);
+const Boards: FC<BoardsProps> = ({ className }) => {
+  const { boardList, guestBoards, session } = useBoardListContext();
   if (!session) return <Navigate to="/login" />;
-
-  const userBoards = await getUserBoards(session.user.id);
-  const guestBoards = await getUserGuestBoards(session.user.id);
 
   return (
     <div className={cn("flex w-full flex-col gap-4", className)}>
       <h2 className="text-2xl font-semibold uppercase">Your Boards</h2>
-      <BoardList boards={userBoards} showCreateBoardBtn />
+      <BoardList boards={boardList} showCreateBoardBtn />
 
       {guestBoards.length > 0 && (
         <>

@@ -10,7 +10,7 @@ interface BoardListProps {
 }
 
 const BoardList: FC<BoardListProps> = async ({
-  boards,
+  boards = [],
   showCreateBoardBtn = false,
 }) => {
   return (
