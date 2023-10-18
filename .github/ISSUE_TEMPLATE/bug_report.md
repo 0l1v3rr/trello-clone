@@ -25,3 +25,8 @@ If applicable, add screenshots to help explain your problem.
 
 **Additional context**
 Add any other context about the problem here.
+
+**Please choose an option below**
+
+- [ ] I would like to work on this issue.
+- [ ] I just opened the issue and would like someone else to handle it.
