@@ -36,7 +36,6 @@ const CardHeader = () => {
         variant="ghost"
         onClick={() => {
           router.back();
-          router.refresh();
         }}
       >
         <X />
