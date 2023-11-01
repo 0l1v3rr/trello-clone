@@ -17,31 +17,32 @@ const CardHeader = () => {
   const { card } = useCardContext();
 
   return (
-    <DialogHeader className="flex w-full flex-row items-start justify-between">
-      <div className="flex w-full flex-col gap-1">
-        <DialogTitle>
+    <DialogHeader className="flex w-full flex-col justify-between">
+      <div className="flex w-full items-center justify-center gap-4">
+        <DialogTitle className="w-full">
           <EditableTitle
             title={card.title}
             onSave={(title) => updateCard(card.id, { title })}
-            className="text-3xl font-semibold hover:bg-transparent"
+            className="w-ful text-3xl font-semibold hover:bg-transparent"
           />
         </DialogTitle>
-        <DialogDescription>
-          in list <span className="underline">{card.list.title}</span>
-        </DialogDescription>
+
+        <Button
+          size="icon"
+          variant="ghost"
+          onClick={() => {
+            router.back();
+            router.refresh();
+          }}
+        >
+          <X />
+          <span className="sr-only">Close</span>
+        </Button>
       </div>
 
-      <Button
-        size="icon"
-        variant="ghost"
-        onClick={() => {
-          router.back();
-          router.refresh();
-        }}
-      >
-        <X />
-        <span className="sr-only">Close</span>
-      </Button>
+      <DialogDescription>
+        in list <span className="underline">{card.list.title}</span>
+      </DialogDescription>
     </DialogHeader>
   );
 };

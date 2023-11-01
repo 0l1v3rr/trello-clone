@@ -27,7 +27,7 @@ const CardDescription = () => {
         >
           <div
             className={cn(
-              "flex flex-col items-start",
+              "flex flex-col items-start break-all text-left [&>*]:break-all [&>*]:text-left [&>p:is(:empty)]:h-4",
               card.description && "text-base"
             )}
           >

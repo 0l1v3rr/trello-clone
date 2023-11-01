@@ -8,7 +8,12 @@ interface DialogWrapperProps extends PropsWithChildren {}
 const DialogWrapper: FC<DialogWrapperProps> = ({ children }) => {
   return (
     <Dialog open>
-      <DialogContent showCloseBtn={false}>{children}</DialogContent>
+      <DialogContent
+        showCloseBtn={false}
+        className="w-[900px] max-w-[min(900px,100%)]"
+      >
+        {children}
+      </DialogContent>
     </Dialog>
   );
 };

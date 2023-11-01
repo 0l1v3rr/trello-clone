@@ -25,7 +25,7 @@ const EditableTitle: FC<EditableTitleProps> = ({
   const inputRef = useOuterClick<HTMLInputElement>(async () => {
     if (mode === "EDIT") {
       setMode("DISPLAY");
-      if (title.trim() === "") return;
+      if (!title.trim()) return;
 
       await onSave(title);
       router.refresh();
@@ -35,6 +35,7 @@ const EditableTitle: FC<EditableTitleProps> = ({
   useEffect(() => {
     if (mode === "EDIT") {
       inputRef.current?.focus();
+      inputRef.current?.select();
     }
   }, [mode, inputRef]);
 
