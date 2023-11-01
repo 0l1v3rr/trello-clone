@@ -15,7 +15,6 @@ import * as z from "zod";
 import { boardSchema } from "@/lib/schemas/board";
 import { generateRandomHex, slugify } from "@/lib/utils";
 import { Alert } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,

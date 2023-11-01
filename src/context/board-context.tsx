@@ -5,7 +5,7 @@ import {
   FC,
   PropsWithChildren,
   useContext,
-  experimental_useOptimistic as useOptimistic,
+  useOptimistic,
 } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { BoardDetail, BoardMemberType, ListDetail } from "@/types/board";
