@@ -59,4 +59,14 @@
   img {
     @apply select-none;
   }
+  .ripple {
+    @apply bg-foreground;
+  }
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
 }
