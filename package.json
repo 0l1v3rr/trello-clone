@@ -34,7 +34,7 @@
     "@radix-ui/react-toggle": "^1.0.3",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@t3-oss/env-nextjs": "^0.7.1",
-    "@tiptap/react": "^2.1.12",
+    "@tiptap/react": "^2.1.13",
     "@tiptap/starter-kit": "^2.1.13",
     "@types/node": "20.10.3",
     "@types/react": "18.2.41",
