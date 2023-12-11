@@ -61,7 +61,7 @@
     "tailwindcss": "3.3.6",
     "tailwindcss-animate": "^1.0.7",
     "ts-node": "^10.9.2",
-    "typescript": "5.3.2",
+    "typescript": "5.3.3",
     "zod": "^3.22.4"
   },
   "devDependencies": {
