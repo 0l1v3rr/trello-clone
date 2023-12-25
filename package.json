@@ -47,7 +47,7 @@
     "eslint": "8.56.0",
     "eslint-config-next": "^14.0.4",
     "html-react-parser": "^5.0.9",
-    "lucide-react": "^0.298.0",
+    "lucide-react": "^0.302.0",
     "next": "^14.0.4",
     "next-auth": "^4.24.5",
     "next-themes": "^0.2.1",
