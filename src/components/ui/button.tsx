@@ -47,7 +47,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const [ripples, handleMouseDown] = useRipple();
 
     return (
-      <div className="relative overflow-hidden rounded-md">
+      <div
+        className={cn(
+          "relative overflow-hidden rounded-md",
+          className?.includes("w-full") && "w-full"
+        )}
+      >
         <Comp
           className={cn(buttonVariants({ variant, size, className }))}
           ref={ref}

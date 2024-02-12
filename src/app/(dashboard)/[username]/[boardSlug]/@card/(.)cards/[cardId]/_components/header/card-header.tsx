@@ -1,5 +1,6 @@
 "use client";
 
+import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
 import { useCardContext } from "@/context/card-context";
 import { X } from "lucide-react";
@@ -14,7 +15,7 @@ import { updateCard } from "@/app/(dashboard)/[username]/[boardSlug]/actions";
 
 const CardHeader = () => {
   const router = useRouter();
-  const { card } = useCardContext();
+  const { card, board } = useCardContext();
 
   return (
     <DialogHeader className="flex w-full flex-col justify-between">
@@ -31,7 +32,7 @@ const CardHeader = () => {
           size="icon"
           variant="ghost"
           onClick={() => {
-            router.back();
+            router.push(`/${board.owner.username}/${board.slug}`);
             router.refresh();
           }}
         >

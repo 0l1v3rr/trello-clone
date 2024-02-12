@@ -22,7 +22,7 @@ const CardDescription = () => {
         <Button
           disabled={permission === "VISITOR"}
           variant={card.description ? "ghost" : "secondary"}
-          className="h-fit justify-start"
+          className="h-fit w-full justify-start"
           onClick={() => setDescriptionEdit(true)}
         >
           <div

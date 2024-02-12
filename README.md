@@ -4,9 +4,6 @@ An open source Trello Clone built with everything new in the [Next.js 14](https:
 
 <img src="./docs/images/screenshot-1.png" alt="Screenshot">
 
-> **Warning**  
-> This project is still under development, so it's not production ready. As such, it lacks certain features and may contain annoying bugs.
-
 <hr />
 
 ## Tech Stack
@@ -27,28 +24,6 @@ An open source Trello Clone built with everything new in the [Next.js 14](https:
 - Formatting: [Prettier](https://prettier.io/)
 - Background Images: [Unsplash](https://unsplash.com/)
 - Illustrations: [storyset](https://storyset.com/)
-
-## Current Features
-
-- Authentication
-  - Log In, Registration
-- Dashboard
-- Light and Dark UI theme
-- Boards
-  - Private, public
-  - Background Images from unsplash
-  - Create lists
-- Cards
-  - Cards inside lists
-  - Labels: CRUD
-  - Card description with WYSIWYG editor
-  - Drag-and-drop functionality amongst the boards
-- Profile
-  - Change password
-
-## Contributing
-
-**Contributions are more than welcome!** Please open an issue if you have any questions or suggestions. See the [contributing guide](./CONTRIBUTING.md) for more information.
 
 ## Running Locally
 
@@ -79,6 +54,10 @@ npm run preview
 ```
 
 After the successful installation, the app should start [here](http://localhost:3000). You can log in with the following credentials: username: **test**, password: **test**
+
+## Contributing
+
+**Contributions are more than welcome!** Please open an issue if you have any questions or suggestions. See the [contributing guide](./CONTRIBUTING.md) for more information.
 
 ## License
 

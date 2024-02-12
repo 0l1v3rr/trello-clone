@@ -33,7 +33,7 @@ const ColorSelector: FC<ColorSelectorProps> = ({ value, onChange }) => {
           className={cn(
             value === color &&
               "outline outline-2 outline-offset-2 outline-primary",
-            "transition-all"
+            "w-full transition-all"
           )}
         />
       ))}

@@ -38,10 +38,7 @@ const DialogContent = React.forwardRef<
   DialogContextProps
 >(({ className, children, showCloseBtn = true, ...props }, ref) => (
   <DialogPortal>
-    <DialogOverlay
-      className="grid place-items-center overflow-y-auto"
-      onClick={() => console.log("click")}
-    >
+    <DialogOverlay className="grid place-items-center overflow-y-auto">
       <DialogPrimitive.Content
         ref={ref}
         className={cn(
